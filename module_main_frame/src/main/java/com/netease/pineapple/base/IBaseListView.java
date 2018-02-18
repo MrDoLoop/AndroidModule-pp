@@ -40,16 +40,6 @@ public interface IBaseListView<T> extends IBaseView<T> {
     void setPresenter(T presenter);
 
     /**
-     * 绑定生命周期
-     */
-    <T> LifecycleTransformer<T> bindToLife();
-
-    /**
-     * 线程转换 绑定生命周期
-     */
-    <T> ObservableTransformer<T, T> compose(LifecycleTransformer<T> lifecycle);
-
-    /**
      * 设置适配器
      */
     void onSetAdapter(List<?> list);

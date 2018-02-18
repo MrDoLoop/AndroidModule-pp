@@ -11,10 +11,6 @@ import com.netease.pineapple.bean.LoadingEndBean;
 
 import me.drakeet.multitype.ItemViewBinder;
 
-/**
- * Created by Meiji on 2017/6/8.
- */
-
 public class LoadingEndViewBinder extends ItemViewBinder<LoadingEndBean, LoadingEndViewBinder.ViewHolder> {
 
     @NonNull

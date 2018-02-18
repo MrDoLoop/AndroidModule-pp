@@ -9,6 +9,7 @@ import com.netease.pineapple.common.utils.GsonUtil;
 import com.netease.pineapple.net.api.INetApis;
 import com.netease.pineapple.net.api.NetApiParamsBuilder;
 import com.netease.pineapple.utils.ErrorActionUtils;
+import com.netease.pineapple.utils.HttpUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +34,6 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
 
     @Override
     public void doLoadData() {
-        Observable<HomeListBean> observable = RetrofitFactory.getRetrofit(mHomeGson).create(INetApis.class)
-                .getHomeRecommendList(NetApiParamsBuilder.getHomeRecommendListParams(fn,offset,mEname));
         BaseEntityObserver observer = new BaseEntityObserver<HomeListBean.HomeListDataBean>() {
             @Override
             public void onRequestSuccess(HomeListBean.HomeListDataBean bean) {
@@ -47,7 +46,7 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
                 ErrorActionUtils.print(e);
             }
         };
-        observable.compose(view.compose(view.bindToLife())).subscribe(observer);
+        HttpUtils.getHomeRecommendList(view, observer, mHomeGson, fn, offset, mEname);
     }
 
     @Override

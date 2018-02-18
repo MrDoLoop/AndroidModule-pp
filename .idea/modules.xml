@@ -6,6 +6,8 @@
       <module fileurl="file://$PROJECT_DIR$/lib_common/lib_common.iml" filepath="$PROJECT_DIR$/lib_common/lib_common.iml" />
       <module fileurl="file://$PROJECT_DIR$/module_app/module_app.iml" filepath="$PROJECT_DIR$/module_app/module_app.iml" />
       <module fileurl="file://$PROJECT_DIR$/module_main_frame/module_main_frame.iml" filepath="$PROJECT_DIR$/module_main_frame/module_main_frame.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module_share/module_share.iml" filepath="$PROJECT_DIR$/module_share/module_share.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module_video_detail/module_video_detail.iml" filepath="$PROJECT_DIR$/module_video_detail/module_video_detail.iml" />
     </modules>
   </component>
 </project>

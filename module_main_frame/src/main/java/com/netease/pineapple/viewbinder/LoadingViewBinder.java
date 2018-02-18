@@ -17,10 +17,6 @@ import com.meiji.toutiao.util.SettingUtil;
 
 import me.drakeet.multitype.ItemViewBinder;
 
-/**
- * Created by Meiji on 2017/6/8.
- */
-
 public class LoadingViewBinder extends ItemViewBinder<LoadingBean, LoadingViewBinder.ViewHolder> {
 
     @NonNull

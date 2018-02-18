@@ -2,6 +2,8 @@ package com.netease.pineapple.base;
 
 import com.trello.rxlifecycle2.LifecycleTransformer;
 
+import io.reactivex.ObservableTransformer;
+
 public interface IBaseView<T> {
 
     /**
@@ -28,4 +30,10 @@ public interface IBaseView<T> {
      * 绑定生命周期
      */
     <T> LifecycleTransformer<T> bindToLife();
+
+    /**
+     * 线程转换 绑定生命周期
+     */
+    <T> ObservableTransformer<T, T> compose(LifecycleTransformer<T> lifecycle);
+
 }

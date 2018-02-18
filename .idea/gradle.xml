@@ -11,6 +11,8 @@
             <option value="$PROJECT_DIR$/lib_common" />
             <option value="$PROJECT_DIR$/module_app" />
             <option value="$PROJECT_DIR$/module_main_frame" />
+            <option value="$PROJECT_DIR$/module_share" />
+            <option value="$PROJECT_DIR$/module_video_detail" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
