@@ -26,6 +26,6 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
+        // 防止退出
     }
 }
