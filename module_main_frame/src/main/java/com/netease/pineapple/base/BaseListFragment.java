@@ -60,8 +60,9 @@ public abstract class BaseListFragment<T extends IBasePresenter> extends LazyLoa
                 oldItems.clear();
                 oldItems.addAll(newItems);
                 adapter.notifyDataSetChanged();
-
-                presenter.doLoadMoreData();
+                if(canLoadMore) {
+                    presenter.doLoadMoreData();
+                }
             }
         };
         adapter = new MultiTypeAdapter(oldItems);
