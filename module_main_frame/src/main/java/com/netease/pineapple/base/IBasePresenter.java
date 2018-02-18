@@ -11,7 +11,9 @@ public interface IBasePresenter {
     /**
      * 显示网络错误
      */
-    void doShowNetError();
+    void doShowError();
+
+    void doShowLoadMoreError();
 
     /**
      * 加载更多

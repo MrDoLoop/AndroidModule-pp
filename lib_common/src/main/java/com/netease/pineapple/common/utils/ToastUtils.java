@@ -5,6 +5,8 @@ import android.os.Looper;
 import android.support.annotation.StringRes;
 import android.widget.Toast;
 
+import com.netease.pineapple.module.common.R;
+
 /**
  * Toast相关工具类
  */
@@ -278,5 +280,12 @@ public class ToastUtils {
             sToast.cancel();
             sToast = null;
         }
+    }
+
+    /**
+     * 显示网络不给力
+     */
+    public static void showNetErrorToast() {
+        showToast(R.string.network_error, Toast.LENGTH_SHORT);
     }
 }

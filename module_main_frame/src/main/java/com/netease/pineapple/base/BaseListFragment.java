@@ -4,14 +4,18 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.netease.pineapple.common.utils.PPUtils;
-import com.netease.pineapple.utils.RxBus;
+import com.netease.pineapple.bean.LoadingBean;
 import com.netease.pineapple.bean.LoadingEndBean;
+import com.netease.pineapple.bean.LoadingErrorBean;
 import com.netease.pineapple.common.utils.NetworkUtils;
+import com.netease.pineapple.common.utils.PPUtils;
 import com.netease.pineapple.common.utils.ToastUtils;
+import com.netease.pineapple.listener.IOnItemClickListener;
+import com.netease.pineapple.listener.OnLoadMoreListener;
 import com.netease.pineapple.module.main.frame.R;
 import com.netease.pineapple.utils.AdapterRegisterUtils;
-import com.netease.pineapple.utils.OnLoadMoreListener;
+import com.netease.pineapple.utils.DiffCallback;
+import com.netease.pineapple.utils.RxBus;
 
 import java.util.List;
 
@@ -46,9 +50,25 @@ public abstract class BaseListFragment<T extends IBasePresenter> extends LazyLoa
         swipeRefreshLayout.setColorSchemeColors(PPUtils.getAppContext().getResources().getColor(R.color.colorPrimary));
         swipeRefreshLayout.setOnRefreshListener(this);
 
+        IOnItemClickListener listener = new IOnItemClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+//                if(!NetworkUtils.isConnected()){
+//                    ToastUtils.showNetErrorToast();
+//                    return;
+//                }
 
+//                Items newItems = new Items(oldItems);
+//                newItems.remove(newItems.size() - 1);
+//                newItems.add(new LoadingBean());
+//                adapter.setItems(newItems);
+//                adapter.notifyDataSetChanged();
+
+                presenter.doLoadMoreData();
+            }
+        };
         adapter = new MultiTypeAdapter(oldItems);
-        AdapterRegisterUtils.registerHomeListItem(adapter);
+        AdapterRegisterUtils.registerHomeListItem(adapter, listener);
         recyclerView.setAdapter(adapter);
         recyclerView.addOnScrollListener(new OnLoadMoreListener() {
             @Override
@@ -60,6 +80,11 @@ public abstract class BaseListFragment<T extends IBasePresenter> extends LazyLoa
             }
         });
 
+    }
+
+    @Override
+    public void onShowError() {
+        ToastUtils.showNetErrorToast();
     }
 
     @Override
@@ -94,15 +119,37 @@ public abstract class BaseListFragment<T extends IBasePresenter> extends LazyLoa
     }
 
     @Override
-    public void onSetAdapter(final List<?> list) {
+    public void onSetAdapter(final List<?> list, boolean loadMore) {
         isDataInitiated = true;
+        Items newItems = new Items(list);
+        if(loadMore) {
+            newItems.add(new LoadingBean());
+        }
+        DiffCallback.create(oldItems, newItems, adapter);
+        oldItems.clear();
+        oldItems.addAll(newItems);
+        canLoadMore = loadMore;
     }
 
     @Override
-    public void onShowNetError() {
-        if(isAdded() && getActivity() != null) {
-            ToastUtils.showShortToast(R.string.network_error);
-        }
+    public void onShowLoadMoreError() {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (oldItems.size() > 0) {
+
+                    Items newItems = new Items(oldItems);
+                    newItems.remove(newItems.size() - 1);
+                    newItems.add(new LoadingErrorBean());
+
+                    oldItems.clear();
+                    oldItems.addAll(newItems);
+                    canLoadMore = true;
+
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
     }
 
     @Override

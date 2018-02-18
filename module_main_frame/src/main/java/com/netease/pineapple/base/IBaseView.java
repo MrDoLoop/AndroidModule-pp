@@ -17,9 +17,9 @@ public interface IBaseView<T> {
     void onHideLoading();
 
     /**
-     * 显示网络错误
+     * 全局错误
      */
-    void onShowNetError();
+    void onShowError();
 
     /**
      * 设置 presenter

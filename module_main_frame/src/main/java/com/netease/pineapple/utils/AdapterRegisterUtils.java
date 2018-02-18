@@ -6,10 +6,13 @@ import com.netease.pineapple.bean.HomeListBean;
 import com.netease.pineapple.bean.ListMultiTypeBean;
 import com.netease.pineapple.bean.LoadingBean;
 import com.netease.pineapple.bean.LoadingEndBean;
+import com.netease.pineapple.bean.LoadingErrorBean;
 import com.netease.pineapple.bean.VideoItemBean;
+import com.netease.pineapple.listener.IOnItemClickListener;
 import com.netease.pineapple.viewbinder.HomeListADBigImgViewBinder;
 import com.netease.pineapple.viewbinder.HomeListVideoViewBinder;
 import com.netease.pineapple.viewbinder.LoadingEndViewBinder;
+import com.netease.pineapple.viewbinder.LoadingErrorViewBinder;
 import com.netease.pineapple.viewbinder.LoadingViewBinder;
 
 import me.drakeet.multitype.ClassLinker;
@@ -17,11 +20,8 @@ import me.drakeet.multitype.ItemViewBinder;
 import me.drakeet.multitype.MultiTypeAdapter;
 
 public class AdapterRegisterUtils {
-
-
-
     /// 要保留的
-    public static void registerHomeListItem(@NonNull MultiTypeAdapter adapter) {
+    public static void registerHomeListItem(@NonNull MultiTypeAdapter adapter, IOnItemClickListener listener) {
         adapter.register(ListMultiTypeBean.class)
                 .to(new HomeListVideoViewBinder(),
                         new HomeListADBigImgViewBinder())
@@ -45,8 +45,13 @@ public class AdapterRegisterUtils {
                         return HomeListVideoViewBinder.class;
                     }
                 });
+        addLoadingBean(adapter, listener);
+    }
 
+    private static void addLoadingBean(@NonNull MultiTypeAdapter adapter, IOnItemClickListener listener) {
+        adapter.register(LoadingErrorBean.class, new LoadingErrorViewBinder(listener));
         adapter.register(LoadingBean.class, new LoadingViewBinder());
         adapter.register(LoadingEndBean.class, new LoadingEndViewBinder());
     }
+
 }

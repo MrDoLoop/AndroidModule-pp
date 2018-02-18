@@ -53,7 +53,7 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
 
             @Override
             public void onRequestError(String msg, Throwable e) {
-                doShowNetError();
+                doShowError();
                 ErrorActionUtils.print(e);
             }
         };
@@ -93,7 +93,7 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
 
             @Override
             public void onRequestError(String msg, Throwable e) {
-                doShowNetError();
+                doShowLoadMoreError();
                 ErrorActionUtils.print(e);
             }
         };
@@ -112,7 +112,7 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
         fn++;
         mDataItemList.addAll(list);
         appendDataToShowList(list);
-        view.onSetAdapter(mShowList);
+        view.onSetAdapter(mShowList, true);
         view.onHideLoading();
     }
 
@@ -179,14 +179,20 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
     }
 
     @Override
-    public void doShowNetError() {
+    public void doShowError() {
         view.onHideLoading();
-        view.onShowNetError();
+        view.onShowError();
     }
 
     @Override
     public void doShowNoMore() {
         view.onHideLoading();
         view.onShowNoMore();
+    }
+
+    @Override
+    public void doShowLoadMoreError() {
+        view.onHideLoading();
+        view.onShowLoadMoreError();
     }
 }

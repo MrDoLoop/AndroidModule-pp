@@ -1,4 +1,4 @@
-package com.netease.pineapple.utils;
+package com.netease.pineapple.listener;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,8 +23,8 @@ public abstract class OnLoadMoreListener extends RecyclerView.OnScrollListener {
             return;
         }
 
-        if (lastItemCount != itemCount && lastPosition == itemCount - 1) {
-            lastItemCount = itemCount;
+        if (lastPosition == itemCount - 1) {
+            //lastItemCount = itemCount;
             this.onLoadMore();
         }
     }

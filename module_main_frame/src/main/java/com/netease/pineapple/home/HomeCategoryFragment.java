@@ -4,12 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.netease.pineapple.base.BaseListFragment;
-import com.netease.pineapple.bean.LoadingBean;
-import com.netease.pineapple.utils.DiffCallback;
-
-import java.util.List;
-
-import me.drakeet.multitype.Items;
 
 public class HomeCategoryFragment extends BaseListFragment<IHomeCategory.Presenter> implements IHomeCategory.View {
 
@@ -39,22 +33,6 @@ public class HomeCategoryFragment extends BaseListFragment<IHomeCategory.Present
         super.fetchData();
         onShowLoading();
         presenter.doLoadData();
-    }
-
-    @Override
-    public void onLoadData() {
-
-    }
-
-    @Override
-    public void onSetAdapter(final List<?> list) {
-        super.onSetAdapter(list);
-        Items newItems = new Items(list);
-        newItems.add(new LoadingBean());
-        DiffCallback.create(oldItems, newItems, adapter);
-        oldItems.clear();
-        oldItems.addAll(newItems);
-        canLoadMore = true;
     }
 
     @Override
