@@ -50,7 +50,7 @@ public abstract class BaseFragment<T extends IBasePresenter> extends RxFragment 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setPresenter(presenter);
+        //setPresenter(presenter);
     }
 
     @Nullable
@@ -59,6 +59,7 @@ public abstract class BaseFragment<T extends IBasePresenter> extends RxFragment 
         View view = inflater.inflate(attachLayoutId(), container, false);
         initView(view);
         initData();
+        setPresenter(presenter);
         return view;
     }
 

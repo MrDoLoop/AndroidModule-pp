@@ -6,9 +6,6 @@ import android.support.v7.util.DiffUtil;
 import me.drakeet.multitype.Items;
 import me.drakeet.multitype.MultiTypeAdapter;
 
-/**
- * Created by Meiji on 2017/4/18.
- */
 
 public class DiffCallback extends DiffUtil.Callback {
 

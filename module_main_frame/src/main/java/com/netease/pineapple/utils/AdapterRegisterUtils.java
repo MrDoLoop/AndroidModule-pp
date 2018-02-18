@@ -2,6 +2,7 @@ package com.netease.pineapple.utils;
 
 import android.support.annotation.NonNull;
 
+import com.netease.pineapple.bean.ListMultiTypeBean;
 import com.netease.pineapple.bean.LoadingBean;
 import com.netease.pineapple.bean.LoadingEndBean;
 import com.meiji.toutiao.bean.joke.JokeCommentBean;
@@ -15,6 +16,7 @@ import com.meiji.toutiao.bean.news.NewsCommentBean;
 import com.meiji.toutiao.bean.photo.PhotoArticleBean;
 import com.meiji.toutiao.bean.wenda.WendaArticleDataBean;
 import com.meiji.toutiao.bean.wenda.WendaContentBean;
+import com.netease.pineapple.bean.VideoItemBean;
 import com.netease.pineapple.viewbinder.LoadingEndViewBinder;
 import com.netease.pineapple.viewbinder.LoadingViewBinder;
 import com.meiji.toutiao.binder.joke.JokeCommentHeaderViewBinder;
@@ -47,6 +49,59 @@ import me.drakeet.multitype.ItemViewBinder;
 import me.drakeet.multitype.MultiTypeAdapter;
 
 public class AdapterRegisterUtils {
+
+
+
+    /// 要保留的
+    public static void registerHomeListItem(@NonNull MultiTypeAdapter adapter) {
+        adapter.register(ListMultiTypeBean.class)
+                .to(new HomeListVideoViewBinder())
+                .withClassLinker(new ClassLinker<ListMultiTypeBean>() {
+                    @NonNull
+                    @Override
+                    public Class<? extends ItemViewBinder<ListMultiTypeBean, ?>> index(int position, @NonNull ListMultiTypeBean item) {
+                        if(item.getType() == ListMultiTypeBean.ListMultiTypeBeanType.TYPE_HOME_LIST_ITEM) {
+                            if(item.getDataObj() instanceof HomeListBean.HomeListDataListItemBean) {
+                                HomeListBean.HomeListDataListItemBean bean = (HomeListBean.HomeListDataListItemBean) item.getDataObj();
+                                if(bean.getContent() instanceof VideoItemBean) {
+                                    return HomeListVideoViewBinder.class;
+                                }
+                            }
+                        }
+                        return HomeListVideoViewBinder.class;
+                    }
+                });
+
+        adapter.register(LoadingBean.class, new LoadingViewBinder());
+        adapter.register(LoadingEndBean.class, new LoadingEndViewBinder());
+    }
+//    public static void registerHomeListItem(@NonNull MultiTypeAdapter adapter) {
+//        adapter.register(HomeListBean.HomeListDataListItemBean.class)
+//                .to(new HomeListVideoViewBinder())
+//                .withClassLinker(new ClassLinker<HomeListBean.HomeListDataListItemBean>() {
+//                    @NonNull
+//                    @Override
+//                    public Class<? extends ItemViewBinder<HomeListBean.HomeListDataListItemBean, ?>> index(int position, @NonNull HomeListBean.HomeListDataListItemBean item) {
+//                        if(item.getType() == HomeListBean.HOME_LIST_ITEM_BEAN_TYPE_VIDEO) {
+//                            return HomeListVideoViewBinder.class;
+//                        }
+//                        return HomeListVideoViewBinder.class;
+//                    }
+//                });
+//
+//        adapter.register(LoadingBean.class, new LoadingViewBinder());
+//        adapter.register(LoadingEndBean.class, new LoadingEndViewBinder());
+//    }
+
+
+
+
+
+
+
+
+
+
 
     public static void registerNewsArticleItem(@NonNull MultiTypeAdapter adapter) {
         // 一个类型对应多个 ItemViewBinder
@@ -200,23 +255,6 @@ public class AdapterRegisterUtils {
 
 
 
-    public static void registerHomeListItem(@NonNull MultiTypeAdapter adapter) {
-        adapter.register(HomeListBean.HomeListDataListItemBean.class)
-                .to(new HomeListVideoViewBinder())
-                .withClassLinker(new ClassLinker<HomeListBean.HomeListDataListItemBean>() {
-                    @NonNull
-                    @Override
-                    public Class<? extends ItemViewBinder<HomeListBean.HomeListDataListItemBean, ?>> index(int position, @NonNull HomeListBean.HomeListDataListItemBean item) {
-                        if(item.getType() == HomeListBean.HOME_LIST_ITEM_BEAN_TYPE_VIDEO) {
-                            return HomeListVideoViewBinder.class;
-                        }
-                        return HomeListVideoViewBinder.class;
-                    }
-                });
-
-        adapter.register(LoadingBean.class, new LoadingViewBinder());
-        adapter.register(LoadingEndBean.class, new LoadingEndViewBinder());
-    }
 
 
 

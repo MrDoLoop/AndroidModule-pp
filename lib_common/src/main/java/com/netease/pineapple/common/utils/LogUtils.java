@@ -11,6 +11,6 @@ import android.util.Log;
 public class LogUtils {
     private static final String TAG = "ttt"; // 赵楠的测试
     public static void i(String msg){
-        Log.i("", msg);
+        Log.i(TAG, msg);
     }
 }
