@@ -7,6 +7,9 @@ android {
         targetSdkVersion build_versions.target_sdk
         versionCode 1
         versionName "1.0"
+
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
     }
 
 
@@ -53,7 +56,7 @@ dependencies {
     api deps.okhttp_log_interceptor
     // other
 
-
+    api deps.multitype_adapter
     api deps.event_bus
     api deps.gson
     api deps.permission

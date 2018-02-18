@@ -13,9 +13,6 @@ android {
         versionCode 1
         versionName "1.0"
 
-        multiDexEnabled true
-        vectorDrawables.useSupportLibrary = true
-
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [ moduleName : project.getName() ]
@@ -62,42 +59,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     annotationProcessor deps.arouter_compiler
     implementation project(':lib_common')
-    //implementation project(':module_pp_base')
-
-    // 简化版 Adapter
-    implementation 'me.drakeet.multitype:multitype:3.4.0'
-
-
-
-    //////////要删除的
-
-    // 解析HTML
-    implementation 'org.jsoup:jsoup:1.10.2'
-
-    // 图片浏览
-    implementation 'com.github.chrisbanes.photoview:library:1.2.4'
-
-    // 协议Dialog
-    implementation 'de.psdev.licensesdialog:licensesdialog:1.8.3'
-
-    // 节操播放器
-    implementation 'fm.jiecao:jiecaovideoplayer:5.7'
-
-    // 持久化 Cookie
-    implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
-
-    // MD dialog
-    implementation 'com.afollestad.material-dialogs:commons:0.9.4.4'
-
-    // 权限管理
-    implementation('com.github.hotchemi:permissionsdispatcher:2.4.0') {
-        exclude module: 'support-v13'
-    }
-    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:2.4.0'
 
     // RxBinding
     implementation 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
-
-    // 响应式排版布局
-    implementation 'com.google.android:flexbox:0.2.7'
 }

@@ -24,7 +24,7 @@ android {
 
     compileSdkVersion build_versions.target_sdk
     defaultConfig {
-        applicationId "com.netease.pineapple.new.module"
+        applicationId "com.netease.pineapple.module.app"
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
         versionCode 1
