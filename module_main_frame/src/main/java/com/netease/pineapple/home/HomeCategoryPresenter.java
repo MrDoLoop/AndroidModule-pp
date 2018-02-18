@@ -6,18 +6,13 @@ import com.netease.pineapple.bean.HomeListResDeserializer;
 import com.netease.pineapple.bean.ListMultiTypeBean;
 import com.netease.pineapple.bean.VideoItemBean;
 import com.netease.pineapple.common.http.BaseEntityObserver;
-import com.netease.pineapple.common.http.RetrofitFactory;
 import com.netease.pineapple.common.utils.DataUtils;
 import com.netease.pineapple.common.utils.GsonUtil;
-import com.netease.pineapple.net.api.INetApis;
-import com.netease.pineapple.net.api.NetApiParamsBuilder;
 import com.netease.pineapple.utils.ErrorActionUtils;
 import com.netease.pineapple.utils.HttpUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import io.reactivex.Observable;
 
 public class HomeCategoryPresenter implements IHomeCategory.Presenter {
 
@@ -76,7 +71,7 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
                     }
                     mAdList.clear();
                     mAdList.addAll(bean.getDatalist());
-                    buildList();
+                    insertAd();
                 }
 
                 @Override
@@ -107,38 +102,74 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
 
     @Override
     public void doSetAdapter(List<HomeListBean.HomeListDataListItemBean> list) {
-        fn++;
         mDataItemList.clear();
         mShowList.clear();
-        mDataItemList.addAll(list);
-        buildList();
-        view.onSetAdapter(mShowList);
-        view.onHideLoading();
+        doAppendMoreData(list);
     }
 
     @Override
     public void doAppendMoreData(List<HomeListBean.HomeListDataListItemBean> list) {
         fn++;
         mDataItemList.addAll(list);
-        buildList();
+        appendDataToShowList(list);
         view.onSetAdapter(mShowList);
         view.onHideLoading();
     }
 
-    private synchronized void buildList() {
+    private synchronized void appendDataToShowList(List<HomeListBean.HomeListDataListItemBean> list) {
         // 1. 添加数据
-        if(DataUtils.listNotEmpty(mDataItemList)) {
-            for(HomeListBean.HomeListDataListItemBean bean : mDataItemList) {
+        if(DataUtils.listNotEmpty(list)) {
+            for(HomeListBean.HomeListDataListItemBean bean : list) {
                 ListMultiTypeBean multiTypeBean = new ListMultiTypeBean(ListMultiTypeBean.ListMultiTypeBeanType.TYPE_HOME_LIST_ITEM, bean);
                 mShowList.add(multiTypeBean);
             }
-            // 2. 添加广告
-            for(HomeListBean.HomeListDataListItemBean bean : mAdList) {
-                ListMultiTypeBean multiTypeBean = new ListMultiTypeBean(ListMultiTypeBean.ListMultiTypeBeanType.TYPE_HOME_LIST_ITEM, bean);
-                mShowList.add(multiTypeBean);
+            insertAd();
+        }
+    }
+
+    private synchronized void insertAd() {
+        // 赵楠的测试 4， 11， 16 插入ad
+        if(mAdList.size() == 0 || mShowList.size() == 0) return;
+        HomeListBean.HomeListDataListItemBean bean = mAdList.get(0);
+
+        ListMultiTypeBean adBean = new ListMultiTypeBean(ListMultiTypeBean.ListMultiTypeBeanType.TYPE_LIST_AD_BIG_IMG_ITEM, bean);
+
+        if(mShowList.size() >= 3) {
+            if(isAdAtPos(3)) {
+                mShowList.set(3, adBean);
+            } else {
+                mShowList.add(3, adBean);
+            }
+        }
+
+        if(mShowList.size() >= 10) {
+            if(isAdAtPos(10)) {
+                mShowList.set(10, adBean);
+            } else {
+                mShowList.add(10, adBean);
+            }
+        }
+
+        if(mShowList.size() >= 16) {
+            if(isAdAtPos(15)) {
+                mShowList.set(15, adBean);
+            } else {
+                mShowList.add(15, adBean);
             }
         }
     }
+
+
+    private boolean isAdAtPos(int pos) {
+        if(pos <= mShowList.size()) {
+            if(mShowList.get(pos).getType() == ListMultiTypeBean.ListMultiTypeBeanType.TYPE_LIST_AD_BIG_IMG_ITEM ||
+                    mShowList.get(pos).getType() == ListMultiTypeBean.ListMultiTypeBeanType.TYPE_LIST_AD_VIDEO_ITEM) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 
     @Override
