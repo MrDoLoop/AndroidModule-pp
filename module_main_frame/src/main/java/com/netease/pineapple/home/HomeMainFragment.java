@@ -26,10 +26,8 @@ public class HomeMainFragment extends Fragment {
     private static HomeMainFragment instance = null;
     private ViewPager mViewPager;
     private HomeCategoryPagerAdapter mAdapter;
-    //private List<Fragment> mFragmentList;
     private List<String> mCTitleList;
     private List<String> mETitleList;
-    //private Map<String, Fragment> map = new HashMap<>();
 
     public static HomeMainFragment getInstance() {
         if (instance == null) {
