@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.netease.pineapple.module.main.frame">
+
+    <application
+        android:name="debug.InitApp"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="菠萝主工程组件"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.netease.pineapple.SplashActivity"
+            android:configChanges="orientation|screenSize|uiMode"
+            android:label="菠萝主工程组件"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.netease.pineapple.MainActivity"
+            android:configChanges="orientation|screenSize|uiMode"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity
+            android:name="com.meiji.toutiao.module.news.content.NewsContentActivity"
+            android:configChanges="orientation|screenSize|uiMode"
+            android:label="@string/title_news_content"
+            android:theme="@style/AppTheme.NoActionBar.Slidable"/>
+
+        <activity
+            android:name="com.meiji.toutiao.module.news.comment.NewsCommentActivity"
+            android:configChanges="orientation|screenSize|uiMode"
+            android:label="@string/title_comment"
+            android:theme="@style/AppTheme.NoActionBar.Slidable"/>
+
+        <activity
+            android:name="com.meiji.toutiao.module.joke.comment.JokeCommentActivity"
+            android:configChanges="orientation|screenSize|uiMode"
+            android:label="@string/title_joke_comment"
+            android:theme="@style/AppTheme.NoActionBar.Slidable"/>
+
+        <activity
+            android:name="com.meiji.toutiao.setting.SettingActivity"
+            android:configChanges="orientation|screenSize|uiMode"
+            android:label="@string/title_settings"
+            android:theme="@style/AppTheme.NoActionBar.Slidable">
+            <intent-filter>
+                <action android:name="android.intent.action.APPLICATION_PREFERENCES"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.meiji.toutiao.module.photo.content.PhotoContentActivity"
+            android:configChanges="orientation|screenSize|uiMode"
+            android:label="@string/title_photo_content"
+            android:theme="@style/AppTheme.NoActionBar.Slidable"/>
+
+        <activity
+            android:name="com.meiji.toutiao.module.news.channel.NewsChannelActivity"
+            android:configChanges="orientation|screenSize|uiMode"
+            android:label="@string/title_item_drag"
+            android:theme="@style/AppTheme.NoActionBar.Slidable"/>
+
+        <activity
+            android:name="com.meiji.toutiao.module.video.content.VideoContentActivity"
+            android:configChanges="orientation|screenSize|uiMode"
+            android:label="@string/title_video_content"
+            android:theme="@style/AppTheme.NoActionBar.Slidable"/>
+
+        <activity
+            android:name="com.meiji.toutiao.module.wenda.content.WendaContentActivity"
+            android:configChanges="orientation|screenSize|uiMode"
+            android:theme="@style/AppTheme.NoActionBar.Slidable"/>
+
+        <activity
+            android:name="com.meiji.toutiao.module.wenda.detail.WendaDetailActivity"
+            android:configChanges="orientation|screenSize|uiMode"
+            android:label="@string/title_wenda_detail"
+            android:theme="@style/AppTheme.NoActionBar.Slidable"/>
+
+        <activity
+            android:name="com.meiji.toutiao.module.search.SearchActivity"
+            android:configChanges="orientation|screenSize|uiMode"
+            android:theme="@style/AppTheme.NoActionBar.Slidable"/>
+
+        <activity
+            android:name="com.meiji.toutiao.module.media.home.MediaHomeActivity"
+            android:configChanges="orientation|screenSize|uiMode"
+            android:theme="@style/AppTheme.NoActionBar.Slidable"/>
+
+    </application>
+
+</manifest>

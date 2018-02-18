@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <!--        <com.netease.pineapple.view.AspectRatioFrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/cover"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            <com.netease.pineapple.player.NEVideoView2
+                android:id="@+id/video_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <FrameLayout
+                    android:id="@+id/video_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <include android:id="@+id/included" layout="@layout/home_list_item_title_cover_mask" />
+
+                    <ImageView
+                        android:id="@+id/play_icon"
+                        android:layout_width="43dp"
+                        android:layout_height="43dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/vcr_player_btn_play" />
+
+                    <TextView
+                        android:id="@+id/watch_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|left"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="15dp"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="13.33sp"
+                        tools:text="984 观看" />
+
+                    <TextView
+                        android:id="@+id/video_length"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|right"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="15dp"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="13.33sp"
+                        tools:text="03:21" />
+                </FrameLayout>
+
+            </com.netease.pineapple.player.NEVideoView2>
+
+            </com.netease.pineapple.view.AspectRatioFrameLayout>-->
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        tools:background="#1122aa">
+
+        <ImageView
+            android:id="@+id/cover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <include
+            android:id="@+id/included"
+            layout="@layout/module_main_frame_home_list_item_title_cover_mask" />
+    </FrameLayout>
+
+    <!-- 主题标签、收藏、分享 -->
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp">
+
+        <LinearLayout
+            android:id="@+id/necode_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|left"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="86dp"
+            android:orientation="horizontal">
+
+            <com.netease.pineapple.view.CircleImageView
+                android:id="@+id/icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:civ_border_color="#1A000000"
+                app:civ_border_width="1dp"
+                tools:background="#1199aa" />
+
+            <TextView
+                android:id="@+id/topic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/module_main_frame_video_topic_text_light"
+                android:textSize="12sp"
+                tools:text="这是一个主题标签" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/video_player_favor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="48dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_like_off_18" />
+
+        <ImageView
+            android:id="@+id/video_player_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="10dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_share_18" />
+    </FrameLayout>
+</LinearLayout>

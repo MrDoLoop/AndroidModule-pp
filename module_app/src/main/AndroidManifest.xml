@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.netease.pineapple">
+
+    <application
+        android:name="com.netease.pineapple.PPApplication"
+        android:allowBackup="false"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/module_app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+    </application>
+
+</manifest>
