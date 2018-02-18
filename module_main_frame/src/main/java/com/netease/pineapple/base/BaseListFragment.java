@@ -53,16 +53,13 @@ public abstract class BaseListFragment<T extends IBasePresenter> extends LazyLoa
         IOnItemClickListener listener = new IOnItemClickListener() {
             @Override
             public void onClick(View view, int position) {
-//                if(!NetworkUtils.isConnected()){
-//                    ToastUtils.showNetErrorToast();
-//                    return;
-//                }
 
-//                Items newItems = new Items(oldItems);
-//                newItems.remove(newItems.size() - 1);
-//                newItems.add(new LoadingBean());
-//                adapter.setItems(newItems);
-//                adapter.notifyDataSetChanged();
+                Items newItems = new Items(oldItems);
+                newItems.remove(newItems.size() - 1);
+                newItems.add(new LoadingBean());
+                oldItems.clear();
+                oldItems.addAll(newItems);
+                adapter.notifyDataSetChanged();
 
                 presenter.doLoadMoreData();
             }
