@@ -6,8 +6,6 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
-import com.meiji.toutiao.module.photo.PhotoTabLayout;
-import com.meiji.toutiao.module.video.VideoTabLayout;
 import com.netease.pineapple.base.BaseActivity;
 import com.netease.pineapple.common.utils.ToastUtils;
 import com.netease.pineapple.helper.BottomNavigationViewHelper;
@@ -22,8 +20,8 @@ public class MainActivity extends BaseActivity {
     private static final int FRAGMENT_PHOTO = 1;
     private static final int FRAGMENT_VIDEO = 2;
     private HomeMainFragment mHomeMainFragment;
-    private PhotoTabLayout photoTabLayout;
-    private VideoTabLayout videoTabLayout;
+//    private PhotoTabLayout photoTabLayout;
+//    private VideoTabLayout videoTabLayout;
     private BottomNavigationView mBottomNavView;
     private long mExitTime = 0;
 
@@ -35,8 +33,8 @@ public class MainActivity extends BaseActivity {
 
         if (savedInstanceState != null) {
             mHomeMainFragment = (HomeMainFragment) getSupportFragmentManager().findFragmentByTag(HomeMainFragment.class.getName());
-            photoTabLayout = (PhotoTabLayout) getSupportFragmentManager().findFragmentByTag(PhotoTabLayout.class.getName());
-            videoTabLayout = (VideoTabLayout) getSupportFragmentManager().findFragmentByTag(VideoTabLayout.class.getName());
+//            photoTabLayout = (PhotoTabLayout) getSupportFragmentManager().findFragmentByTag(PhotoTabLayout.class.getName());
+//            videoTabLayout = (VideoTabLayout) getSupportFragmentManager().findFragmentByTag(VideoTabLayout.class.getName());
             // 恢复 recreate 前的位置
             showFragment(savedInstanceState.getInt(CUR_FRAGMENT));
             mBottomNavView.setSelectedItemId(savedInstanceState.getInt(CUR_FRAGMENT));
@@ -91,23 +89,23 @@ public class MainActivity extends BaseActivity {
                 }
                 break;
 
-            case FRAGMENT_PHOTO:
-                if (photoTabLayout == null) {
-                    photoTabLayout = PhotoTabLayout.getInstance();
-                    ft.add(R.id.container, photoTabLayout, PhotoTabLayout.class.getName());
-                } else {
-                    ft.show(photoTabLayout);
-                }
-                break;
-
-            case FRAGMENT_VIDEO:
-                if (videoTabLayout == null) {
-                    videoTabLayout = VideoTabLayout.getInstance();
-                    ft.add(R.id.container, videoTabLayout, VideoTabLayout.class.getName());
-                } else {
-                    ft.show(videoTabLayout);
-                }
-                break;
+//            case FRAGMENT_PHOTO:
+//                if (photoTabLayout == null) {
+//                    photoTabLayout = PhotoTabLayout.getInstance();
+//                    ft.add(R.id.container, photoTabLayout, PhotoTabLayout.class.getName());
+//                } else {
+//                    ft.show(photoTabLayout);
+//                }
+//                break;
+//
+//            case FRAGMENT_VIDEO:
+//                if (videoTabLayout == null) {
+//                    videoTabLayout = VideoTabLayout.getInstance();
+//                    ft.add(R.id.container, videoTabLayout, VideoTabLayout.class.getName());
+//                } else {
+//                    ft.show(videoTabLayout);
+//                }
+//                break;
         }
 
         ft.commit();
@@ -118,12 +116,12 @@ public class MainActivity extends BaseActivity {
         if (mHomeMainFragment != null) {
             ft.hide(mHomeMainFragment);
         }
-        if (photoTabLayout != null) {
-            ft.hide(photoTabLayout);
-        }
-        if (videoTabLayout != null) {
-            ft.hide(videoTabLayout);
-        }
+//        if (photoTabLayout != null) {
+//            ft.hide(photoTabLayout);
+//        }
+//        if (videoTabLayout != null) {
+//            ft.hide(videoTabLayout);
+//        }
     }
 
     @Override

@@ -11,9 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.netease.pineapple.common.utils.PPUtils;
 import com.netease.pineapple.module.main.frame.R;;
 import com.netease.pineapple.bean.LoadingBean;
-import com.meiji.toutiao.util.SettingUtil;
 
 import me.drakeet.multitype.ItemViewBinder;
 
@@ -28,7 +28,7 @@ public class LoadingViewBinder extends ItemViewBinder<LoadingBean, LoadingViewBi
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull LoadingBean item) {
-        int color = SettingUtil.getInstance().getColor();
+        int color = PPUtils.getAppContext().getResources().getColor(R.color.colorPrimary);//SettingUtil.getInstance().getColor();
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             Drawable wrapDrawable = DrawableCompat.wrap(holder.progressBar.getIndeterminateDrawable());
             DrawableCompat.setTint(wrapDrawable, color);

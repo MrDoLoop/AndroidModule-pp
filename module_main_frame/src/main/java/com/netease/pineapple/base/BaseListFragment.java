@@ -4,8 +4,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.netease.pineapple.common.utils.PPUtils;
 import com.netease.pineapple.utils.RxBus;
-import com.meiji.toutiao.util.SettingUtil;
 import com.netease.pineapple.bean.LoadingEndBean;
 import com.netease.pineapple.common.utils.NetworkUtils;
 import com.netease.pineapple.common.utils.ToastUtils;
@@ -43,7 +43,7 @@ public abstract class BaseListFragment<T extends IBasePresenter> extends LazyLoa
         recyclerView.setHasFixedSize(true);
 
         swipeRefreshLayout = view.findViewById(R.id.refresh_layout);
-        swipeRefreshLayout.setColorSchemeColors(SettingUtil.getInstance().getColor());
+        swipeRefreshLayout.setColorSchemeColors(PPUtils.getAppContext().getResources().getColor(R.color.colorPrimary));
         swipeRefreshLayout.setOnRefreshListener(this);
 
 

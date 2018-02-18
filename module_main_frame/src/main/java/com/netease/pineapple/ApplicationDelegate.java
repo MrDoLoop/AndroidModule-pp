@@ -2,7 +2,6 @@ package com.netease.pineapple;
 
 import android.support.annotation.Keep;
 
-import com.meiji.toutiao.api.INewsApi;
 import com.netease.pineapple.common.base.IApplicationDelegate;
 import com.netease.pineapple.common.http.RetrofitFactory;
 import com.netease.pineapple.net.api.INetApis;
