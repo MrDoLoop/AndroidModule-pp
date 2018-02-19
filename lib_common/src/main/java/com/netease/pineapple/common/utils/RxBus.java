@@ -1,4 +1,4 @@
-package com.netease.pineapple.utils;
+package com.netease.pineapple.common.utils;
 
 import android.support.annotation.NonNull;
 

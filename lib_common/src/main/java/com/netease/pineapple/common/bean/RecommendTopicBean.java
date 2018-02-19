@@ -1,4 +1,4 @@
-package com.netease.pineapple.bean;
+package com.netease.pineapple.common.bean;
 
 import com.netease.pineapple.common.http.JsonBase;
 import com.netease.pineapple.common.utils.StringUtils;

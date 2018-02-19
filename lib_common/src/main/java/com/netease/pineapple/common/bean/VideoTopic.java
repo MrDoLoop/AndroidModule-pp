@@ -1,8 +1,7 @@
-package com.netease.pineapple.bean;
+package com.netease.pineapple.common.bean;
 
 import android.text.TextUtils;
-
-import com.netease.pineapple.cache.LocalSavedInfoCacheManager;
+import com.netease.pineapple.common.cache.LocalSavedInfoCacheManager;
 import com.netease.pineapple.common.http.JsonBase;
 
 /**

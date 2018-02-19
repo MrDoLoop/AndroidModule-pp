@@ -1,4 +1,4 @@
-package com.netease.pineapple.listener;
+package com.netease.pineapple.common.listener;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
