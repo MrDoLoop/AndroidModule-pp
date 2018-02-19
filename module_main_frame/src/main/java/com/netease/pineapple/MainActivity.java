@@ -1,15 +1,13 @@
 package com.netease.pineapple;
 
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
-import android.view.View;
 
-import com.netease.pineapple.base.BaseActivity;
+import com.netease.pineapple.common.base.BaseActivity;
 import com.netease.pineapple.common.utils.ToastUtils;
 import com.netease.pineapple.helper.BottomNavigationViewHelper;
 import com.netease.pineapple.home.HomeMainFragment;

@@ -9,19 +9,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.jakewharton.rxbinding2.view.RxView;
-import com.netease.pineapple.bean.HomeListBean;
-import com.netease.pineapple.bean.ListMultiTypeBean;
-import com.netease.pineapple.bean.VideoItemBean;
+import com.netease.pineapple.common.bean.HomeListBean;
+import com.netease.pineapple.common.bean.ListMultiTypeBean;
+import com.netease.pineapple.common.bean.VideoItemBean;
 import com.netease.pineapple.common.glide.ImageLoader;
-import com.netease.pineapple.module.main.frame.R;
-import com.netease.pineapple.utils.ErrorActionUtils;
+import com.netease.pineapple.common.widget.CircleImageView;
+import com.netease.pineapple.module.common.R;
 import com.netease.pineapple.utils.IntentUtils;
-import com.netease.pineapple.view.CircleImageView;
 
-import java.util.concurrent.TimeUnit;
-
-import io.reactivex.functions.Consumer;
 import me.drakeet.multitype.ItemViewBinder;
 
 
@@ -47,27 +42,20 @@ public class HomeListADBigImgViewBinder extends ItemViewBinder<ListMultiTypeBean
                     holder.tv_topic.setText(dataBean.getTname());
                     ImageLoader.loadCenterCrop(context, dataBean.getCover(), holder.iv_cover, R.color.viewBackground);
                     ImageLoader.loadCenterCrop(context, dataBean.getVideoTopic().getTopic_icons(), holder.iv_icon, R.color.viewBackground);
-
-                    // 2种方式添加点击事件
-                    RxView.clicks(holder.iv_share)
-                            .throttleFirst(1, TimeUnit.SECONDS)
-                            .subscribe(new Consumer<Object>() {
-                                @Override
-                                public void accept(@io.reactivex.annotations.NonNull Object o) throws Exception {
-                                    IntentUtils.startVideoDetailActivity();
-                                }
-                            });
+                    holder.iv_share.setOnClickListener(this);
                     holder.iv_like.setOnClickListener(this);
                 }
             }
         } catch (Exception e) {
-            ErrorActionUtils.print(e);
+            e.printStackTrace();
         }
     }
 
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.video_player_favor) {
+
+        }else if(v.getId() == R.id.video_player_share) {
             IntentUtils.startShareActivity();
         }
     }

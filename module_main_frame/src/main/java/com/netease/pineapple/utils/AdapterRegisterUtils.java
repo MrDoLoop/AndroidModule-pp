@@ -2,18 +2,18 @@ package com.netease.pineapple.utils;
 
 import android.support.annotation.NonNull;
 
-import com.netease.pineapple.bean.HomeListBean;
-import com.netease.pineapple.bean.ListMultiTypeBean;
-import com.netease.pineapple.bean.LoadingBean;
-import com.netease.pineapple.bean.LoadingEndBean;
-import com.netease.pineapple.bean.LoadingErrorBean;
-import com.netease.pineapple.bean.VideoItemBean;
-import com.netease.pineapple.listener.IOnItemClickListener;
+import com.netease.pineapple.common.bean.HomeListBean;
+import com.netease.pineapple.common.bean.ListMultiTypeBean;
+import com.netease.pineapple.common.bean.LoadingBean;
+import com.netease.pineapple.common.bean.LoadingEndBean;
+import com.netease.pineapple.common.bean.LoadingErrorBean;
+import com.netease.pineapple.common.bean.VideoItemBean;
+import com.netease.pineapple.common.listener.IOnItemClickListener;
 import com.netease.pineapple.viewbinder.HomeListADBigImgViewBinder;
 import com.netease.pineapple.viewbinder.HomeListVideoViewBinder;
-import com.netease.pineapple.viewbinder.LoadingEndViewBinder;
-import com.netease.pineapple.viewbinder.LoadingErrorViewBinder;
-import com.netease.pineapple.viewbinder.LoadingViewBinder;
+import com.netease.pineapple.common.viewbinder.LoadingEndViewBinder;
+import com.netease.pineapple.common.viewbinder.LoadingErrorViewBinder;
+import com.netease.pineapple.common.viewbinder.LoadingViewBinder;
 
 import me.drakeet.multitype.ClassLinker;
 import me.drakeet.multitype.ItemViewBinder;

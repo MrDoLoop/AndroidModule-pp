@@ -1,8 +1,8 @@
 package com.netease.pineapple.net.api;
 
 
-import com.netease.pineapple.bean.CategoryListBean;
-import com.netease.pineapple.bean.HomeListBean;
+import com.netease.pineapple.common.bean.CategoryListBean;
+import com.netease.pineapple.common.bean.HomeListBean;
 
 import java.util.Map;
 

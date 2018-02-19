@@ -1,10 +1,10 @@
 package com.netease.pineapple.home;
 
 import com.google.gson.Gson;
-import com.netease.pineapple.bean.HomeListBean;
-import com.netease.pineapple.bean.HomeListResDeserializer;
-import com.netease.pineapple.bean.ListMultiTypeBean;
-import com.netease.pineapple.bean.VideoItemBean;
+import com.netease.pineapple.common.bean.HomeListBean;
+import com.netease.pineapple.common.bean.HomeListResDeserializer;
+import com.netease.pineapple.common.bean.ListMultiTypeBean;
+import com.netease.pineapple.common.bean.VideoItemBean;
 import com.netease.pineapple.common.http.BaseEntityObserver;
 import com.netease.pineapple.common.utils.DataUtils;
 import com.netease.pineapple.common.utils.GsonUtil;

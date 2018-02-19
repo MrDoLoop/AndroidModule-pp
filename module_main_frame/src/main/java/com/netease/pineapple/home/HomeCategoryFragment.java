@@ -3,7 +3,8 @@ package com.netease.pineapple.home;
 import android.os.Bundle;
 import android.view.View;
 
-import com.netease.pineapple.base.BaseListFragment;
+import com.netease.pineapple.common.base.BaseListFragment;
+import com.netease.pineapple.utils.AdapterRegisterUtils;
 
 public class HomeCategoryFragment extends BaseListFragment<IHomeCategory.Presenter> implements IHomeCategory.View {
 
@@ -27,6 +28,7 @@ public class HomeCategoryFragment extends BaseListFragment<IHomeCategory.Present
     @Override
     protected void initView(View view) {
         super.initView(view);
+        AdapterRegisterUtils.registerHomeListItem(adapter, loadMoreErrorClickListener);
     }
 
     @Override

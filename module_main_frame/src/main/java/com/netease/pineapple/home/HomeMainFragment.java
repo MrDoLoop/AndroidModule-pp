@@ -5,8 +5,8 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.netease.pineapple.base.BaseFragment;
-import com.netease.pineapple.bean.CategoryBean;
+import com.netease.pineapple.common.base.BaseFragment;
+import com.netease.pineapple.common.bean.CategoryBean;
 import com.netease.pineapple.common.utils.DataUtils;
 import com.netease.pineapple.module.main.frame.R;
 

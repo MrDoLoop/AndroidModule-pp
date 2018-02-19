@@ -62,6 +62,8 @@ dependencies {
     api deps.permission
     api deps.glide
     api deps.logger
+    debugCompile deps.leakcanary_debug
+    releaseCompile deps.leakcanary_release
 
     //router
     api deps.arouter_api

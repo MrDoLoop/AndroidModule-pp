@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/module_main_frame/module_main_frame.iml" filepath="$PROJECT_DIR$/module_main_frame/module_main_frame.iml" />
       <module fileurl="file://$PROJECT_DIR$/module_share/module_share.iml" filepath="$PROJECT_DIR$/module_share/module_share.iml" />
       <module fileurl="file://$PROJECT_DIR$/module_video_detail/module_video_detail.iml" filepath="$PROJECT_DIR$/module_video_detail/module_video_detail.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module_view_histroy_test/module_view_histroy_test.iml" filepath="$PROJECT_DIR$/module_view_histroy_test/module_view_histroy_test.iml" />
     </modules>
   </component>
 </project>

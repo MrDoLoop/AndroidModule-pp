@@ -1,8 +1,8 @@
 package com.netease.pineapple.home;
 
-import com.netease.pineapple.base.IBaseListView;
-import com.netease.pineapple.base.IBasePresenter;
-import com.netease.pineapple.bean.HomeListBean;
+import com.netease.pineapple.common.base.IBaseListView;
+import com.netease.pineapple.common.base.IBasePresenter;
+import com.netease.pineapple.common.bean.HomeListBean;
 
 import java.util.List;
 

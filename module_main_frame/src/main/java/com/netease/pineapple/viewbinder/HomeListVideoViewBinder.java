@@ -9,16 +9,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.jakewharton.rxbinding2.view.RxView;
-import com.netease.pineapple.bean.HomeListBean;
-import com.netease.pineapple.bean.ListMultiTypeBean;
-import com.netease.pineapple.bean.VideoItemBean;
+import com.netease.pineapple.common.bean.HomeListBean;
+import com.netease.pineapple.common.bean.ListMultiTypeBean;
+import com.netease.pineapple.common.bean.VideoItemBean;
 import com.netease.pineapple.module.main.frame.R;
 import com.netease.pineapple.utils.ErrorActionUtils;
 import com.netease.pineapple.common.glide.ImageLoader;
 import com.netease.pineapple.utils.IntentUtils;
-import com.netease.pineapple.view.CircleImageView;
+import com.netease.pineapple.common.widget.CircleImageView;
 
 import java.util.concurrent.TimeUnit;
 

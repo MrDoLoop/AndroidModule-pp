@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/module_main_frame" />
             <option value="$PROJECT_DIR$/module_share" />
             <option value="$PROJECT_DIR$/module_video_detail" />
+            <option value="$PROJECT_DIR$/module_view_histroy_test" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

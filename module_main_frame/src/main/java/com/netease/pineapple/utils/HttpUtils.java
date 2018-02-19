@@ -1,9 +1,9 @@
 package com.netease.pineapple.utils;
 
 import com.google.gson.Gson;
-import com.netease.pineapple.base.IBaseView;
-import com.netease.pineapple.bean.CategoryListBean;
-import com.netease.pineapple.bean.HomeListBean;
+import com.netease.pineapple.common.base.IBaseView;
+import com.netease.pineapple.common.bean.CategoryListBean;
+import com.netease.pineapple.common.bean.HomeListBean;
 import com.netease.pineapple.common.http.BaseEntityObserver;
 import com.netease.pineapple.common.http.RetrofitFactory;
 import com.netease.pineapple.net.api.INetApis;

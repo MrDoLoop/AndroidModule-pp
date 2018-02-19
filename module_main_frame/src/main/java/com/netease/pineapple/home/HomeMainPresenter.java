@@ -1,7 +1,7 @@
 package com.netease.pineapple.home;
 
-import com.netease.pineapple.bean.CategoryBean;
-import com.netease.pineapple.bean.CategoryListBean;
+import com.netease.pineapple.common.bean.CategoryBean;
+import com.netease.pineapple.common.bean.CategoryListBean;
 import com.netease.pineapple.common.http.BaseEntityObserver;
 import com.netease.pineapple.common.utils.GsonUtil;
 import com.netease.pineapple.common.utils.PPUtils;

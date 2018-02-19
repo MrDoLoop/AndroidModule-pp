@@ -4,6 +4,8 @@ import android.app.Application;
 
 import com.netease.pineapple.common.utils.ClassUtils;
 import com.netease.pineapple.common.utils.PPUtils;
+import com.squareup.leakcanary.LeakCanary;
+
 import java.util.List;
 
 /**
@@ -29,8 +31,15 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
         sInstance = this;
         PPUtils.init(this);
+        LeakCanary.install(this);
+
         mAppDelegateList = ClassUtils.getObjectsWithInterface(this, IApplicationDelegate.class, ROOT_PACKAGE);
         for (IApplicationDelegate delegate : mAppDelegateList) {
             delegate.onCreate();
