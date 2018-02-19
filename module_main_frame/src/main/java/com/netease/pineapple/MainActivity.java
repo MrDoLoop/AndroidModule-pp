@@ -1,10 +1,13 @@
 package com.netease.pineapple;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.netease.pineapple.base.BaseActivity;
 import com.netease.pineapple.common.utils.ToastUtils;
@@ -41,12 +44,14 @@ public class MainActivity extends BaseActivity {
         } else {
             showFragment(FRAGMENT_MAIN);
         }
+        setStatusBarColor(Color.WHITE);
+        setStatusBarLightMode();
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         // recreate 时记录当前位置 (在 Manifest 已禁止 Activity 旋转,所以旋转屏幕并不会执行以下代码)
-        super.onSaveInstanceState(outState);
+        //super.onSaveInstanceState(outState); // 有可能崩溃
         outState.putInt(CUR_FRAGMENT, mBottomNavView.getSelectedItemId());
     }
 

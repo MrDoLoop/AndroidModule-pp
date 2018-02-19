@@ -1,10 +1,13 @@
 package com.netease.pineapple.base;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.netease.pineapple.common.utils.StatusBarUtils;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
@@ -28,6 +31,22 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(homeAsUpEnabled);
     }
+
+    protected void setStatusBarColor(int color) {
+        StatusBarUtils.setColor(this, color);
+    }
+    //https://www.jianshu.com/p/7f5a9969be53
+
+    /**
+     * 设置状态栏为文字的颜色为黑色 6.0以后才有效
+     * 主要是为了适应白色状态栏栏的时候
+     */
+    protected void setStatusBarLightMode(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
+    }
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
