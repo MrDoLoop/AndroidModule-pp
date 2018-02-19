@@ -1,11 +1,15 @@
 package com.netease.pineapple.common.base;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
 
-import com.netease.pineapple.common.utils.ClassUtils;
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.netease.pineapple.common.utils.HttpUtils;
 import com.netease.pineapple.common.utils.PPUtils;
 import com.squareup.leakcanary.LeakCanary;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,8 +25,9 @@ public class BaseApplication extends Application {
 
     private static BaseApplication sInstance;
 
-    private List<IApplicationDelegate> mAppDelegateList;
+    private static boolean sInitDone = false;
 
+    private List<IApplicationDelegate> mAppDelegateList = new ArrayList<>();
 
     public static BaseApplication getInstance() {
         return sInstance;
@@ -31,20 +36,47 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        init();
+        //mAppDelegateList = ClassUtils.getObjectsWithInterface(this, IApplicationDelegate.class, ROOT_PACKAGE);
+        for (IApplicationDelegate delegate : mAppDelegateList) {
+            delegate.onCreate();
+        }
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
+
+
+    private void init() {
+        if(sInitDone) return;
+        sInitDone = true;
+
+        // 初始化内存检测
         if (LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.
             // You should not init your app in this process.
             return;
         }
-        sInstance = this;
-        PPUtils.init(this);
         LeakCanary.install(this);
 
-        mAppDelegateList = ClassUtils.getObjectsWithInterface(this, IApplicationDelegate.class, ROOT_PACKAGE);
-        for (IApplicationDelegate delegate : mAppDelegateList) {
-            delegate.onCreate();
-        }
+        // 实例初始化
+        sInstance = this;
 
+        // 工具初始化
+        PPUtils.init(this);
+
+        //初始化路由系统
+        if (PPUtils.isAppDebug()) {
+            //开启InstantRun之后，一定要在ARouter.init之前调用openDebug
+            ARouter.openDebug();
+            ARouter.openLog();
+        }
+        ARouter.init(this);
+
+        HttpUtils.init();
     }
 
     @Override

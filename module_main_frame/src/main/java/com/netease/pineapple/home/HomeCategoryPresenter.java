@@ -8,8 +8,8 @@ import com.netease.pineapple.common.bean.VideoItemBean;
 import com.netease.pineapple.common.http.BaseEntityObserver;
 import com.netease.pineapple.common.utils.DataUtils;
 import com.netease.pineapple.common.utils.GsonUtil;
-import com.netease.pineapple.utils.ErrorActionUtils;
-import com.netease.pineapple.utils.HttpUtils;
+import com.netease.pineapple.common.utils.ErrorActionUtils;
+import com.netease.pineapple.common.utils.HttpUtils;
 
 import java.util.ArrayList;
 import java.util.List;

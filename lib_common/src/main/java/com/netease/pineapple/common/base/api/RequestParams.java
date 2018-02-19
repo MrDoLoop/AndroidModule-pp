@@ -1,4 +1,4 @@
-package com.netease.pineapple.net.api;
+package com.netease.pineapple.common.base.api;
 
 import android.net.Uri;
 

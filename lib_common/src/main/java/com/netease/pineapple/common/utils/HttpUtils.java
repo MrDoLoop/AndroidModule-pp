@@ -1,4 +1,4 @@
-package com.netease.pineapple.utils;
+package com.netease.pineapple.common.utils;
 
 import com.google.gson.Gson;
 import com.netease.pineapple.common.base.IBaseView;
@@ -6,8 +6,8 @@ import com.netease.pineapple.common.bean.CategoryListBean;
 import com.netease.pineapple.common.bean.HomeListBean;
 import com.netease.pineapple.common.http.BaseEntityObserver;
 import com.netease.pineapple.common.http.RetrofitFactory;
-import com.netease.pineapple.net.api.INetApis;
-import com.netease.pineapple.net.api.NetApiParamsBuilder;
+import com.netease.pineapple.common.base.api.INetApis;
+import com.netease.pineapple.common.base.api.NetApiParamsBuilder;
 
 import io.reactivex.Observable;
 
@@ -42,6 +42,11 @@ public class HttpUtils {
 
     public static void getHomeCategroyList(IBaseView view, BaseEntityObserver observer) {
         Observable<CategoryListBean> observable = sNetApis.getHomeCatergoryList();
+        observable.compose(view.compose(view.bindToLife())).subscribe(observer);
+    }
+
+    public static void getViewHistroyList(IBaseView view, BaseEntityObserver observer, int start, int size, String lastId) {
+        Observable<CategoryListBean> observable = sNetApis.getWatchHistory(NetApiParamsBuilder.getViewHistroyParams(start, size, lastId));
         observable.compose(view.compose(view.bindToLife())).subscribe(observer);
     }
 

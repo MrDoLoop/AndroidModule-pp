@@ -20,6 +20,12 @@ public class HomeCategoryFragment extends BaseListFragment<IHomeCategory.Present
     }
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        enableLazyLoad = true;
+        super.setUserVisibleHint(isVisibleToUser);
+    }
+
+    @Override
     protected void initData() {
         mEname = getArguments().getString(TAG);
         presenter.setEname(mEname);

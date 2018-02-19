@@ -1,10 +1,12 @@
 package com.netease.pineapple.common.bean;
 
+import com.netease.pineapple.common.http.JsonBase;
+
 /**
  * Created by zhaonan on 2018/2/18.
  */
 
-public class ListMultiTypeBean {
+public class ListMultiTypeBean extends JsonBase {
     private int type;
     private Object dataObj;
 

@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 public abstract class LazyLoadFragment<T extends IBasePresenter> extends BaseFragment<T> {
 
+    protected  boolean enableLazyLoad = false;
     protected boolean isViewInitiated;
     protected boolean isVisibleToUser;
     protected boolean isDataInitiated;
@@ -34,6 +35,11 @@ public abstract class LazyLoadFragment<T extends IBasePresenter> extends BaseFra
     }
 
     public boolean prepareFetchData(boolean forceUpdate) {
+        if(!enableLazyLoad) {
+            fetchData();
+            return false;
+        }
+
         if (isVisibleToUser && isViewInitiated && (!isDataInitiated || forceUpdate)) {
             fetchData();
             //isDataInitiated = true;

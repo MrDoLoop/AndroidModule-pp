@@ -1,4 +1,4 @@
-package com.netease.pineapple.net.api;
+package com.netease.pineapple.common.base.api;
 
 import com.netease.pineapple.common.utils.AESUtils;
 import com.netease.pineapple.common.utils.AppInfoUitls;
@@ -17,12 +17,17 @@ public class NetApiParamsBuilder {
     /**
      * 列表请求的默认长度
      */
-    public static int DEFAULT_REQ_DATA_SIZE = 10;
+    public static int DEFAULT_REQ_REC_DATA_SIZE = 10;
 
+    public static int DEFAULT_REQ_DATA_SIZE = 20;
+
+    /**
+     * 首页推荐列表参数
+     */
     public static HashMap<String, String> getHomeRecommendListParams(int fn, int offset, String ename){
         RequestParams params = new RequestParams();
         params.put("subtab", ename);
-        params.put("size", DEFAULT_REQ_DATA_SIZE);
+        params.put("size", DEFAULT_REQ_REC_DATA_SIZE);
         params.put("offset", offset);
         params.put("fn", fn);
         params.put("passport", "");//暂时空缺
@@ -41,4 +46,16 @@ public class NetApiParamsBuilder {
         params.put("from", "Boluo");
         return params.urlParams;
     }
+
+    /**
+     * 观看历史参数
+     */
+    public static HashMap<String, String> getViewHistroyParams(int start, int size, String lastId){
+        RequestParams params = new RequestParams();
+        params.put("start", start);
+        params.put("size", size);
+        params.put("lastId", lastId);
+        return params.urlParams;
+    }
+
 }

@@ -1,12 +1,12 @@
-package com.netease.pineapple;
+package com.netease.pineapple.module.view.histroy;
 
 import android.support.annotation.Keep;
 
 import com.netease.pineapple.common.base.IApplicationDelegate;
 
-// 防止打包的时候被资源优化掉
 @Keep
 public class ApplicationDelegate implements IApplicationDelegate {
+
     @Override
     public void onCreate() {
 
@@ -26,5 +26,4 @@ public class ApplicationDelegate implements IApplicationDelegate {
     public void onTrimMemory(int level) {
 
     }
-
 }

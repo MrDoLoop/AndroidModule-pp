@@ -6,8 +6,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.netease.pineapple.common.utils.StatusBarUtils;
+import com.netease.pineapple.module.common.R;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
@@ -23,11 +25,14 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 
     private static final String TAG = "BaseActivity";
 
+    public static final String FRAGMENT_TAG = "fragment_tag";
+
     /**
      * 初始化 Toolbar
      */
     protected void initToolBar(Toolbar toolbar, boolean homeAsUpEnabled, String title) {
-        toolbar.setTitle(title);
+        ((TextView) toolbar.findViewById(R.id.toolbar_title)).setText(title);
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(homeAsUpEnabled);
     }

@@ -14,7 +14,7 @@ import com.netease.pineapple.common.bean.HomeListBean;
 import com.netease.pineapple.common.bean.ListMultiTypeBean;
 import com.netease.pineapple.common.bean.VideoItemBean;
 import com.netease.pineapple.module.main.frame.R;
-import com.netease.pineapple.utils.ErrorActionUtils;
+import com.netease.pineapple.common.utils.ErrorActionUtils;
 import com.netease.pineapple.common.glide.ImageLoader;
 import com.netease.pineapple.utils.IntentUtils;
 import com.netease.pineapple.common.widget.CircleImageView;
