@@ -52,7 +52,7 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
 
             @Override
             public void onRequestError(String msg, Throwable e) {
-                doShowError();
+                doShowError(msg);
                 ErrorActionUtils.print(e);
             }
         };
@@ -181,9 +181,9 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
     }
 
     @Override
-    public void doShowError() {
+    public void doShowError(String msg) {
         view.onHideLoading();
-        view.onShowError();
+        view.onShowError(msg);
     }
 
     @Override

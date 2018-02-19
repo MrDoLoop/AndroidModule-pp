@@ -16,18 +16,11 @@ import java.util.List;
 public class HomeMainFragment extends BaseFragment<IHomeMain.Presenter> implements IHomeMain.View {
 
     public static final String TAG = "HomeMainFragment";
-    private static HomeMainFragment instance = null;
+
     private ViewPager mViewPager;
     private HomeCategoryPagerAdapter mAdapter;
     private List<String> mCTitleList;
     private List<String> mETitleList;
-
-    public static HomeMainFragment getInstance() {
-        if (instance == null) {
-            instance = new HomeMainFragment();
-        }
-        return instance;
-    }
 
     @Override
     protected int attachLayoutId() {
@@ -70,7 +63,7 @@ public class HomeMainFragment extends BaseFragment<IHomeMain.Presenter> implemen
             mAdapter = new HomeCategoryPagerAdapter(getChildFragmentManager(), mCTitleList, mETitleList);
             mViewPager.setAdapter(mAdapter);
         } else {
-            onShowError();
+            onShowError("列表为null");
         }
     }
 
@@ -85,7 +78,7 @@ public class HomeMainFragment extends BaseFragment<IHomeMain.Presenter> implemen
     }
 
     @Override
-    public void onShowError() {
+    public void onShowError(String msg) {
 
     }
 

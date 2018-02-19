@@ -29,7 +29,7 @@ public class HomeMainPresenter implements IHomeMain.Presenter {
     }
 
     @Override
-    public void doShowError() {
+    public void doShowError(String msg) {
 
     }
 

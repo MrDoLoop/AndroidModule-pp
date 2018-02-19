@@ -19,7 +19,7 @@ public interface IBaseView<T> {
     /**
      * 全局错误
      */
-    void onShowError();
+    void onShowError(String s);
 
     /**
      * 设置 presenter

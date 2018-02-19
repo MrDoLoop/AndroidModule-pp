@@ -7,6 +7,7 @@ import com.netease.pineapple.common.bean.WatchHistoryResultBean;
 import com.netease.pineapple.common.http.BaseEntityObserver;
 import com.netease.pineapple.common.utils.ErrorActionUtils;
 import com.netease.pineapple.common.utils.HttpUtils;
+import com.netease.pineapple.common.utils.ToastUtils;
 
 import java.util.List;
 
@@ -26,12 +27,13 @@ public class ViewHistroyPresenter implements IViewHistroy.Presenter  {
 
     @Override
     public void doRefresh() {
-
+        doLoadData();
     }
 
     @Override
-    public void doShowError() {
-
+    public void doShowError(String msg) {
+        view.onHideLoading();
+        ToastUtils.showShortToast(msg);
     }
 
     @Override
@@ -52,7 +54,7 @@ public class ViewHistroyPresenter implements IViewHistroy.Presenter  {
 
             @Override
             public void onRequestError(String msg, Throwable e) {
-                doShowError();
+                doShowError(msg);
                 ErrorActionUtils.print(e);
             }
         };
@@ -70,7 +72,7 @@ public class ViewHistroyPresenter implements IViewHistroy.Presenter  {
 
             @Override
             public void onRequestError(String msg, Throwable e) {
-                doShowError();
+                doShowError(msg);
                 ErrorActionUtils.print(e);
             }
         };
@@ -86,41 +88,4 @@ public class ViewHistroyPresenter implements IViewHistroy.Presenter  {
     public void doSetAdapter(List<VideoItemBean> list) {
 
     }
-
-//    @Override
-//    public void doGetCatagoryList() {
-//        //请求网络数据
-//        BaseEntityObserver observer = new BaseEntityObserver<ArrayList<CategoryBean>>() {
-//            @Override
-//            public void onRequestSuccess(ArrayList<CategoryBean> s) {
-//                view.onShowCatagoryList(s);
-//            }
-//
-//            @Override
-//            public void onRequestError(String msg, Throwable e) {
-//                super.onRequestError(msg, e);
-//                view.onShowCatagoryList(readCategorylListFromAsset());
-//            }
-//        };
-//        HttpUtils.getHomeCategroyList(view, observer);
-//    }
-//
-//
-//    private ArrayList<CategoryBean> readCategorylListFromAsset() {
-//        try {
-//            InputStream is = PPUtils.getAppContext().getAssets().open("category.txt");
-//            int size = is.available();
-//            byte[] buffer = new byte[size];
-//            is.read(buffer);
-//            is.close();
-//            String text = new String(buffer, "utf8");
-//            CategoryListBean ret = GsonUtil.parse(text, CategoryListBean.class);
-//            return ret.getData();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        return null;
-//    }
-
 }

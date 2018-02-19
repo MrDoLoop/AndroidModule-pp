@@ -81,8 +81,8 @@ public abstract class BaseListFragment<T extends IBasePresenter> extends LazyLoa
     }
 
     @Override
-    public void onShowError() {
-        ToastUtils.showNetErrorToast();
+    public void onShowError(String msg) {
+        ToastUtils.showShortToast(msg);
     }
 
     @Override

@@ -85,7 +85,7 @@ public class MainActivity extends BaseActivity {
                  * 如果不为空，就将它从栈中显示出来
                  */
                 if (mHomeMainFragment == null) {
-                    mHomeMainFragment = HomeMainFragment.getInstance();
+                    mHomeMainFragment = new HomeMainFragment(); //HomeMainFragment.getInstance();
                     ft.add(R.id.container, mHomeMainFragment, HomeMainFragment.class.getName());
                 } else {
                     ft.show(mHomeMainFragment);
@@ -136,5 +136,10 @@ public class MainActivity extends BaseActivity {
             ToastUtils.showShortToast(R.string.double_click_exit);
             mExitTime = currentTime;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }
