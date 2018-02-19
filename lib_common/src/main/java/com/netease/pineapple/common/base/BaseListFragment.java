@@ -159,11 +159,15 @@ public abstract class BaseListFragment<T extends IBasePresenter> extends LazyLoa
                     Items newItems = new Items(oldItems);
                     newItems.remove(newItems.size() - 1);
                     newItems.add(new LoadingEndBean());
-                    adapter.setItems(newItems);
+
+                    oldItems.clear();
+                    oldItems.addAll(newItems);
+
+                    //adapter.setItems(newItems);
                     adapter.notifyDataSetChanged();
                 } else if (oldItems.size() == 0) {
                     oldItems.add(new LoadingEndBean());
-                    adapter.setItems(oldItems);
+                    //adapter.setItems(oldItems);
                     adapter.notifyDataSetChanged();
                 }
                 canLoadMore = false;
