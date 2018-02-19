@@ -26,5 +26,9 @@ public interface IHomeCategory {
          * 是否有广告
          */
         boolean hasAD();
+        /**
+         * 设置请求的ename
+         */
+        void setEname(String ename);
     }
 }

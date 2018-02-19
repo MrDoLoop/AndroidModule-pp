@@ -8,7 +8,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Looper;
 import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -63,16 +62,6 @@ public class PPUtils {
         }
 
         throw new IllegalStateException("View " + view + " is not attached to an Activity");
-    }
-
-    /**
-     * 全局获取String的方法
-     *
-     * @param id 资源Id
-     * @return String
-     */
-    public static String getString(@StringRes int id) {
-        return AppContext.getResources().getString(id);
     }
 
     /**

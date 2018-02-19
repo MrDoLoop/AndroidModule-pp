@@ -44,7 +44,7 @@ public abstract class BaseListFragment<T extends IBasePresenter> extends LazyLoa
     @Override
     protected void initView(View view) {
         recyclerView = view.findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(true);
+        //recyclerView.setHasFixedSize(true);
 
         swipeRefreshLayout = view.findViewById(R.id.refresh_layout);
         swipeRefreshLayout.setColorSchemeColors(PPUtils.getAppContext().getResources().getColor(R.color.colorPrimary));

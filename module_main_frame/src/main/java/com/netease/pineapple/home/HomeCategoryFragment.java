@@ -21,6 +21,7 @@ public class HomeCategoryFragment extends BaseListFragment<IHomeCategory.Present
     @Override
     protected void initData() {
         mEname = getArguments().getString(TAG);
+        presenter.setEname(mEname);
     }
 
     @Override
@@ -38,7 +39,7 @@ public class HomeCategoryFragment extends BaseListFragment<IHomeCategory.Present
     @Override
     public void setPresenter(IHomeCategory.Presenter presenter) {
         if (null == presenter) {
-            this.presenter = new HomeCategoryPresenter(this, mEname);
+            this.presenter = new HomeCategoryPresenter(this);
         }
     }
 }

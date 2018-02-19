@@ -27,7 +27,7 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
 
     private String mEname;
     private Gson mHomeGson;
-    int fn = 1;
+    private int mFn = 1;
 
     @Override
     public boolean hasAD() {
@@ -37,9 +37,8 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
         return false;
     }
 
-    public HomeCategoryPresenter(IHomeCategory.View view, String ename) {
+    public HomeCategoryPresenter(IHomeCategory.View view) {
         this.view = view;
-        this.mEname = ename;
         this.mHomeGson = GsonUtil.getGsonWithDeserializer(HomeListBean.class, new HomeListResDeserializer());
     }
 
@@ -57,7 +56,7 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
                 ErrorActionUtils.print(e);
             }
         };
-        HttpUtils.getHomeRecommendList(view, observer, mHomeGson, fn, 0, mEname);
+        HttpUtils.getHomeRecommendList(view, observer, mHomeGson, mFn, 0, mEname);
 
         if(hasAD()) {
             // 请求广告
@@ -79,7 +78,7 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
                     ErrorActionUtils.print(e);
                 }
             };
-            HttpUtils.getHomeRecommendList(view, AdObserver, mHomeGson, fn, 0, mEname);
+            HttpUtils.getHomeRecommendList(view, AdObserver, mHomeGson, mFn, 0, mEname);
         }
     }
 
@@ -97,7 +96,7 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
                 ErrorActionUtils.print(e);
             }
         };
-        HttpUtils.getHomeRecommendList(view, observer, mHomeGson, fn, mDataItemList.size(), mEname);
+        HttpUtils.getHomeRecommendList(view, observer, mHomeGson, mFn, mDataItemList.size(), mEname);
     }
 
     @Override
@@ -109,7 +108,7 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
 
     @Override
     public void doAppendMoreData(List<HomeListBean.HomeListDataListItemBean> list) {
-        fn++;
+        mFn++;
         mDataItemList.addAll(list);
         appendDataToShowList(list);
         view.onSetAdapter(mShowList, true);
@@ -170,7 +169,10 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
         return false;
     }
 
-
+    @Override
+    public void setEname(String ename) {
+        this.mEname = ename;
+    }
 
     @Override
     public void doRefresh() {

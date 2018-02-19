@@ -52,6 +52,6 @@ public abstract class BaseEntityObserver<T> implements Observer<BaseEntity<T>> ,
 
     @Override
     public void onRequestError(String msg, Throwable e) {
-
+        e.printStackTrace();
     }
 }

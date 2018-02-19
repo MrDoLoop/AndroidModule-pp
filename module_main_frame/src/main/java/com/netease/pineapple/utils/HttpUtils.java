@@ -2,6 +2,7 @@ package com.netease.pineapple.utils;
 
 import com.google.gson.Gson;
 import com.netease.pineapple.base.IBaseView;
+import com.netease.pineapple.bean.CategoryListBean;
 import com.netease.pineapple.bean.HomeListBean;
 import com.netease.pineapple.common.http.BaseEntityObserver;
 import com.netease.pineapple.common.http.RetrofitFactory;
@@ -15,6 +16,15 @@ import io.reactivex.Observable;
  */
 
 public class HttpUtils {
+
+    private static INetApis sNetApis;
+
+    public static void init() {
+        RetrofitFactory.init(INetApis.HOST);
+        sNetApis = RetrofitFactory.getRetrofit().create(INetApis.class);
+    }
+
+
     /**
      * 获取首页列表
      * @param view
@@ -29,4 +39,10 @@ public class HttpUtils {
                 .getHomeRecommendList(NetApiParamsBuilder.getHomeRecommendListParams(fn,offset,ename));
         observable.compose(view.compose(view.bindToLife())).subscribe(observer);
     }
+
+    public static void getHomeCategroyList(IBaseView view, BaseEntityObserver observer) {
+        Observable<CategoryListBean> observable = sNetApis.getHomeCatergoryList();
+        observable.compose(view.compose(view.bindToLife())).subscribe(observer);
+    }
+
 }

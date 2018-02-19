@@ -1,26 +1,19 @@
 package com.netease.pineapple.home;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.netease.pineapple.base.BaseFragment;
 import com.netease.pineapple.bean.CategoryBean;
-import com.netease.pineapple.bean.CategoryListBean;
 import com.netease.pineapple.common.utils.DataUtils;
-import com.netease.pineapple.common.utils.GsonUtil;
 import com.netease.pineapple.module.main.frame.R;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeMainFragment extends Fragment {
+public class HomeMainFragment extends BaseFragment<IHomeMain.Presenter> implements IHomeMain.View {
 
     public static final String TAG = "HomeMainFragment";
     private static HomeMainFragment instance = null;
@@ -36,16 +29,13 @@ public class HomeMainFragment extends Fragment {
         return instance;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.module_main_frame_home_main_fragment, container, false);
-        initView(view);
-        initData();
-        return view;
+    protected int attachLayoutId() {
+        return R.layout.module_main_frame_home_main_fragment;
     }
 
-    private void initView(View view) {
+    @Override
+    protected void initView(View view) {
         mViewPager = view.findViewById(R.id.view_pager);
         TabLayout tab_layout = view.findViewById(R.id.tab_layout_catagory);
         tab_layout.setupWithViewPager(mViewPager);
@@ -59,39 +49,50 @@ public class HomeMainFragment extends Fragment {
         });
     }
 
-    private void initData() {
-        initTabs();
-        mAdapter = new HomeCategoryPagerAdapter(getChildFragmentManager(), mCTitleList, mETitleList);
-        mViewPager.setAdapter(mAdapter);
+    @Override
+    protected void initData() {
+        presenter.doGetCatagoryList();
     }
 
-
-    private CategoryListBean readCategorylListFromAsset() {
-        try {
-            InputStream is = getActivity().getAssets().open("category.txt");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            String text = new String(buffer, "utf8");
-            CategoryListBean ret = GsonUtil.parse(text, CategoryListBean.class);
-            return ret;
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-    private void initTabs() {
-        CategoryListBean categoryListBean = readCategorylListFromAsset();
+    private void initTabs(ArrayList<CategoryBean> list) {
         mCTitleList = new ArrayList<>();
         mETitleList = new ArrayList<>();
-        if(categoryListBean != null && DataUtils.listNotEmpty(categoryListBean.getData())) {
-            for (CategoryBean bean : categoryListBean.getData()) {
-                mCTitleList.add(bean.cname);
-                mETitleList.add(bean.ename);
-            }
+        for (CategoryBean bean : list) {
+            mCTitleList.add(bean.cname);
+            mETitleList.add(bean.ename);
+        }
+    }
+
+    @Override
+    public void onShowCatagoryList(ArrayList<CategoryBean> list) {
+        if(list != null && DataUtils.listNotEmpty(list)) {
+            initTabs(list);
+            mAdapter = new HomeCategoryPagerAdapter(getChildFragmentManager(), mCTitleList, mETitleList);
+            mViewPager.setAdapter(mAdapter);
+        } else {
+            onShowError();
+        }
+    }
+
+    @Override
+    public void onShowLoading() {
+
+    }
+
+    @Override
+    public void onHideLoading() {
+
+    }
+
+    @Override
+    public void onShowError() {
+
+    }
+
+    @Override
+    public void setPresenter(IHomeMain.Presenter presenter) {
+        if (null == presenter) {
+            this.presenter = new HomeMainPresenter(this);
         }
     }
 }

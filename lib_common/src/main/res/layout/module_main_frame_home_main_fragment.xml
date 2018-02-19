@@ -38,7 +38,7 @@
             android:paddingRight="10dp"
             android:paddingTop="4dp"
             android:scaleType="center"
-            app:srcCompat="@drawable/ic_add_black_24dp"
+            app:srcCompat="@drawable/ic_search_black_24dp"
             tools:ignore="ContentDescription"/>
     </LinearLayout>
 
@@ -46,7 +46,6 @@
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:layout="@layout/fragment_list">
     </android.support.v4.view.ViewPager>
 

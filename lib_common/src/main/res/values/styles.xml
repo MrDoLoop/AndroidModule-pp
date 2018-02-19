@@ -7,21 +7,20 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppFullSrcStyle" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="SplashTheme" parent="AppTheme.NoActionBar">
-        <item name="android:windowBackground">@drawable/splash_bg</item>
-    </style>
 
-    <style name="NightTheme" parent="AppTheme.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary_night</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark_night</item>
-        <item name="colorAccent">@color/colorAccent_night</item>
-        <item name="textColorPrimary">@color/textColorPrimary_night</item>
-        <item name="viewBackground">@color/viewBackground_night</item>
+    <style name="SplashTheme" parent="AppFullSrcStyle">
+        <item name="android:windowBackground">@drawable/splash_bg</item>
     </style>
 
     <style name="DayTheme" parent="AppTheme.NoActionBar">
