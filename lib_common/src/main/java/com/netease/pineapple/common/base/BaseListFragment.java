@@ -14,6 +14,7 @@ import com.netease.pineapple.common.utils.NetworkUtils;
 import com.netease.pineapple.common.utils.PPUtils;
 import com.netease.pineapple.common.utils.RxBus;
 import com.netease.pineapple.common.utils.ToastUtils;
+import com.netease.pineapple.common.widget.NetworkStateView;
 import com.netease.pineapple.module.common.R;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public abstract class BaseListFragment<T extends IBasePresenter> extends LazyLoa
     protected MultiTypeAdapter adapter;
     protected Items oldItems = new Items();
     protected boolean canLoadMore = false;
+    protected NetworkStateView networkStateView;
     protected Observable<Integer> observable;
     protected IOnItemClickListener loadMoreErrorClickListener;
 
@@ -46,6 +48,7 @@ public abstract class BaseListFragment<T extends IBasePresenter> extends LazyLoa
         recyclerView = view.findViewById(R.id.recycler_view);
         //recyclerView.setHasFixedSize(true);
 
+        networkStateView = view.findViewById(R.id.state_view);
         swipeRefreshLayout = view.findViewById(R.id.refresh_layout);
         swipeRefreshLayout.setColorSchemeColors(PPUtils.getAppContext().getResources().getColor(R.color.colorPrimary));
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -83,6 +86,7 @@ public abstract class BaseListFragment<T extends IBasePresenter> extends LazyLoa
     @Override
     public void onShowError(String msg) {
         ToastUtils.showShortToast(msg);
+        networkStateView.showError();
     }
 
     @Override

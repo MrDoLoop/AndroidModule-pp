@@ -63,4 +63,25 @@
         <item name="android:dropDownVerticalOffset">0dp</item>
     </style>
 
+
+    <style name="NetworkStateView">
+
+    </style>
+    <!-- NetworkStateView样式 -->
+    <style name="NetworkStateView.Style">
+        <item name="loadingView">@layout/view_loading</item>
+        <item name="errorView">@layout/view_network_error</item>
+        <item name="nsvErrorImage">@drawable/ic_net_error</item>
+        <item name="nsvErrorText">网络异常~</item>
+        <item name="emptyView">@layout/view_empty</item>
+        <item name="nsvEmptyImage">@drawable/ic_empty</item>
+        <item name="nsvEmptyText">没有数据~</item>
+        <item name="noNetworkView">@layout/view_no_network</item>
+        <item name="nsvNoNetworkImage">@drawable/ic_no_network</item>
+        <item name="nsvNoNetworkText">没有网络~</item>
+        <item name="nsvRefreshImage">@drawable/ic_refresh</item>
+        <item name="nsvTextSize">14sp</item>
+        <item name="nsvTextColor">#8a000000</item>
+    </style>
+
 </resources>

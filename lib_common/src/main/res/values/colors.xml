@@ -55,10 +55,10 @@
     <color name="Grey800">#424242</color>
     <color name="Grey900">#212121</color>
 
-    <color name="module_main_frame_video_topic_text_light">#FF9B9B9B</color> <!-- 10%-->
+    <color name="video_topic_text_light">#FF9B9B9B</color> <!-- 10%-->
 
-    <color name="module_main_frame_video_list_bg_dark">#99000000</color> <!-- 60%-->
-    <color name="module_main_frame_video_list_bg_light">#4D000000</color> <!-- 30%-->
-    <color name="module_main_frame_video_list_bg_slight">#1A000000</color> <!-- 10%-->
-    <color name="module_main_frame_white">#ffffff</color> <!-- 10%-->
+    <color name="video_list_bg_dark">#99000000</color> <!-- 60%-->
+    <color name="video_list_bg_light">#4D000000</color> <!-- 30%-->
+    <color name="video_list_bg_slight">#1A000000</color> <!-- 10%-->
+    <color name="white">#ffffff</color> <!-- 10%-->
 </resources>

@@ -112,7 +112,7 @@
                 android:layout_marginLeft="10dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textColor="@color/module_main_frame_video_topic_text_light"
+                android:textColor="@color/video_topic_text_light"
                 android:textSize="12sp"
                 tools:text="这是一个主题标签" />
         </LinearLayout>

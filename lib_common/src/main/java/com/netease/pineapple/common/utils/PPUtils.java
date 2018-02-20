@@ -102,6 +102,15 @@ public class PPUtils {
         return obj;
     }
 
+    /**
+     * 将dp值转换为px值
+     * @param dp 需要转换的dp值
+     * @return px值
+     */
+    public static int dp2px(float dp) {
+        return (int) (AppContext.getResources().getDisplayMetrics().density * dp + 0.5f);
+    }
+
 
     public static boolean isMainThread() {
         return Looper.getMainLooper() == Looper.myLooper();
