@@ -24,7 +24,7 @@ public interface IBaseView<T> {
     /**
      * 设置 presenter
      */
-    void setPresenter(T presenter);
+    void setPresenter(T preter);
 
     /**
      * 绑定生命周期

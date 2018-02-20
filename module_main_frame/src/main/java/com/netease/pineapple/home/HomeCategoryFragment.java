@@ -20,9 +20,8 @@ public class HomeCategoryFragment extends BaseListFragment<IHomeCategory.Present
     }
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        enableLazyLoad = true;
-        super.setUserVisibleHint(isVisibleToUser);
+    protected boolean enableLazyLoad() {
+        return true;
     }
 
     @Override

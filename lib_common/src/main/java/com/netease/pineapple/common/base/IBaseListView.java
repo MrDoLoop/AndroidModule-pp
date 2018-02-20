@@ -13,7 +13,7 @@ public interface IBaseListView<T> extends IBaseView<T> {
     /**
      * 设置 presenter
      */
-    void setPresenter(T presenter);
+    void setPresenter(T preter);
 
     /**
      * 设置适配器

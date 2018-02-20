@@ -71,6 +71,7 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
                     mAdList.clear();
                     mAdList.addAll(bean.getDatalist());
                     insertAd();
+                    updateList();
                 }
 
                 @Override
@@ -78,7 +79,7 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
                     ErrorActionUtils.print(e);
                 }
             };
-            HttpUtils.getHomeRecommendList(view, AdObserver, mHomeGson, mFn, 0, mEname);
+            HttpUtils.getHomeRecommendList(view, AdObserver, mHomeGson, mFn, 40, mEname);
         }
     }
 
@@ -111,9 +112,14 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
         mFn++;
         mDataItemList.addAll(list);
         appendDataToShowList(list);
+        updateList();
+    }
+
+    private void updateList() {
         view.onSetAdapter(mShowList, true);
         view.onHideLoading();
     }
+
 
     private synchronized void appendDataToShowList(List<HomeListBean.HomeListDataListItemBean> list) {
         // 1. 添加数据
