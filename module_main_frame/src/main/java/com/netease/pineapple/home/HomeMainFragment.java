@@ -18,6 +18,7 @@ public class HomeMainFragment extends BaseFragment<IHomeMain.Presenter> implemen
     public static final String TAG = "HomeMainFragment";
 
     private ViewPager mViewPager;
+    private TabLayout mTabLayout;
     private HomeCategoryPagerAdapter mAdapter;
     private List<String> mCTitleList;
     private List<String> mETitleList;
@@ -30,9 +31,9 @@ public class HomeMainFragment extends BaseFragment<IHomeMain.Presenter> implemen
     @Override
     protected void initView(View view) {
         mViewPager = view.findViewById(R.id.view_pager);
-        TabLayout tab_layout = view.findViewById(R.id.tab_layout_catagory);
-        tab_layout.setupWithViewPager(mViewPager);
-        tab_layout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        mTabLayout = view.findViewById(R.id.tab_layout_catagory);
+        mTabLayout.setupWithViewPager(mViewPager);
+
         ImageView search = view.findViewById(R.id.search);
         search.setOnClickListener(new View.OnClickListener() {
             @Override

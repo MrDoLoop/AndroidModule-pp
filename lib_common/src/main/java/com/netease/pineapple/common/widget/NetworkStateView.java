@@ -97,7 +97,6 @@ public class NetworkStateView extends LinearLayout {
 
         mInflater = LayoutInflater.from(context);
         params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        setBackgroundColor(getResources().getColor(R.color.white));
     }
 
     @Override
@@ -179,9 +178,9 @@ public class NetworkStateView extends LinearLayout {
                 networkRefreshView.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (null != mRefreshListener) {
-                            mRefreshListener.onRefresh();
-                        }
+//                        if (null != mRefreshListener) {
+//                            mRefreshListener.onRefresh();
+//                        }
                     }
                 });
             }
@@ -211,9 +210,9 @@ public class NetworkStateView extends LinearLayout {
                 emptyRefreshView.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (null != mRefreshListener) {
-                            mRefreshListener.onRefresh();
-                        }
+//                        if (null != mRefreshListener) {
+//                            mRefreshListener.onRefresh();
+//                        }
                     }
                 });
             }

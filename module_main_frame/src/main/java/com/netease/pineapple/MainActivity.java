@@ -18,8 +18,8 @@ public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
     private static final String CUR_FRAGMENT = "CUR_FRAGMENT";
     private static final int FRAGMENT_MAIN = 0;
-    private static final int FRAGMENT_PHOTO = 1;
-    private static final int FRAGMENT_VIDEO = 2;
+    private static final int FRAGMENT_DISCOVERY = 1;
+    private static final int FRAGMENT_MINE = 2;
     private HomeMainFragment mHomeMainFragment;
 //    private PhotoTabLayout photoTabLayout;
 //    private VideoTabLayout videoTabLayout;
@@ -61,14 +61,14 @@ public class MainActivity extends BaseActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                if(item.getItemId() == R.id.action_news) {
+                if(item.getItemId() == R.id.action_main) {
                     showFragment(FRAGMENT_MAIN);
                 }
-                else if(item.getItemId() == R.id.action_photo) {
-                    showFragment(FRAGMENT_PHOTO);
+                else if(item.getItemId() == R.id.action_discovery) {
+                    showFragment(FRAGMENT_DISCOVERY);
                 }
-                else if(item.getItemId() == R.id.action_video) {
-                    showFragment(FRAGMENT_VIDEO);
+                else if(item.getItemId() == R.id.action_mine) {
+                    showFragment(FRAGMENT_MINE);
                 }
                 return true;
             }
@@ -85,7 +85,7 @@ public class MainActivity extends BaseActivity {
                  * 如果不为空，就将它从栈中显示出来
                  */
                 if (mHomeMainFragment == null) {
-                    mHomeMainFragment = new HomeMainFragment(); //HomeMainFragment.getInstance();
+                    mHomeMainFragment = new HomeMainFragment();
                     ft.add(R.id.container, mHomeMainFragment, HomeMainFragment.class.getName());
                 } else {
                     ft.show(mHomeMainFragment);
@@ -136,10 +136,5 @@ public class MainActivity extends BaseActivity {
             ToastUtils.showShortToast(R.string.double_click_exit);
             mExitTime = currentTime;
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
     }
 }

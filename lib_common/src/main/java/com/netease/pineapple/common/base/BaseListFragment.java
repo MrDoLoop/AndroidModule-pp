@@ -49,6 +49,17 @@ public abstract class BaseListFragment<T extends IBasePresenter> extends LazyLoa
         //recyclerView.setHasFixedSize(true);
 
         networkStateView = view.findViewById(R.id.state_view);
+        networkStateView.setOnRefreshListener(new NetworkStateView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if(NetworkUtils.isConnected()) {
+                    onShowLoading();
+                    presenter.doLoadData();
+                } else {
+                    ToastUtils.showNetErrorToast();
+                }
+            }
+        });
         swipeRefreshLayout = view.findViewById(R.id.refresh_layout);
         swipeRefreshLayout.setColorSchemeColors(PPUtils.getAppContext().getResources().getColor(R.color.colorPrimary));
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -80,7 +91,6 @@ public abstract class BaseListFragment<T extends IBasePresenter> extends LazyLoa
                 }
             }
         });
-
     }
 
     @Override
@@ -91,16 +101,18 @@ public abstract class BaseListFragment<T extends IBasePresenter> extends LazyLoa
 
     @Override
     public void onShowLoading() {
-        swipeRefreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                swipeRefreshLayout.setRefreshing(true);
-            }
-        });
+        networkStateView.showLoading();
+//        swipeRefreshLayout.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                swipeRefreshLayout.setRefreshing(true);
+//            }
+//        });
     }
 
     @Override
     public void onHideLoading() {
+        networkStateView.showSuccess();
         swipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {

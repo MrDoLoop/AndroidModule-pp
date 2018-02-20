@@ -182,7 +182,7 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
 
     @Override
     public void doRefresh() {
-        view.onShowLoading();
+        //view.onShowLoading();
         doLoadData();
     }
 
