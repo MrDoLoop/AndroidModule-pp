@@ -21,9 +21,9 @@ public interface IBasePresenter {
     void doLoadMoreData();
 
     /**
-     * 请求数据
+     * 初始请求数据
      */
-    void doLoadData();
+    void doInitLoadData();
 
     /**
      * 加载完毕

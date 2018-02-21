@@ -14,9 +14,6 @@ public interface IHomeMain {
     }
 
     interface Presenter extends IBasePresenter {
-        /**
-         * 获取分类列表
-         */
-        void doGetCatagoryList();
+
     }
 }

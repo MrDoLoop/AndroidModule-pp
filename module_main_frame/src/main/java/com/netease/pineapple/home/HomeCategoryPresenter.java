@@ -43,7 +43,7 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
     }
 
     @Override
-    public void doLoadData() {
+    public void doInitLoadData() {
         BaseEntityObserver observer = new BaseEntityObserver<HomeListBean.HomeListDataBean>() {
             @Override
             public void onRequestSuccess(HomeListBean.HomeListDataBean bean) {
@@ -183,7 +183,7 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
     @Override
     public void doRefresh() {
         //view.onShowLoading();
-        doLoadData();
+        doInitLoadData();
     }
 
     @Override

@@ -40,7 +40,7 @@ public class HomeCategoryFragment extends BaseListFragment<IHomeCategory.Present
     public void fetchData() {
         super.fetchData();
         onShowLoading();
-        presenter.doLoadData();
+        presenter.doInitLoadData();
     }
 
     @Override

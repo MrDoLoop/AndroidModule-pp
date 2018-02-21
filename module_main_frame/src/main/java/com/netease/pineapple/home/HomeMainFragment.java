@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import com.netease.pineapple.common.base.BaseFragment;
 import com.netease.pineapple.common.bean.CategoryBean;
 import com.netease.pineapple.common.utils.DataUtils;
+import com.netease.pineapple.common.widget.NetworkStateView;
 import com.netease.pineapple.module.main.frame.R;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class HomeMainFragment extends BaseFragment<IHomeMain.Presenter> implemen
 
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
+    private NetworkStateView mNetworkStateView;
     private HomeCategoryPagerAdapter mAdapter;
     private List<String> mCTitleList;
     private List<String> mETitleList;
@@ -30,6 +32,7 @@ public class HomeMainFragment extends BaseFragment<IHomeMain.Presenter> implemen
 
     @Override
     protected void initView(View view) {
+        mNetworkStateView = view.findViewById(R.id.state_view);
         mViewPager = view.findViewById(R.id.view_pager);
         mTabLayout = view.findViewById(R.id.tab_layout_catagory);
         mTabLayout.setupWithViewPager(mViewPager);
@@ -45,7 +48,7 @@ public class HomeMainFragment extends BaseFragment<IHomeMain.Presenter> implemen
 
     @Override
     protected void initData() {
-        presenter.doGetCatagoryList();
+        presenter.doInitLoadData();
     }
 
     private void initTabs(ArrayList<CategoryBean> list) {
@@ -70,12 +73,12 @@ public class HomeMainFragment extends BaseFragment<IHomeMain.Presenter> implemen
 
     @Override
     public void onShowLoading() {
-
+        mNetworkStateView.showLoading();
     }
 
     @Override
     public void onHideLoading() {
-
+        mNetworkStateView.showSuccess();
     }
 
     @Override

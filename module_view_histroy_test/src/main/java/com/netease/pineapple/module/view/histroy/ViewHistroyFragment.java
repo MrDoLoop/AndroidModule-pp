@@ -33,6 +33,6 @@ public class ViewHistroyFragment extends BaseListFragment<IViewHistroy.Presenter
     public void fetchData() {
         super.fetchData();
         onShowLoading();
-        presenter.doLoadData();
+        presenter.doInitLoadData();
     }
 }

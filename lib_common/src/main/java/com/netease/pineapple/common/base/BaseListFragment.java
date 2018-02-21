@@ -54,7 +54,7 @@ public abstract class BaseListFragment<T extends IBasePresenter> extends LazyLoa
             public void onRefresh() {
                 if(NetworkUtils.isConnected()) {
                     onShowLoading();
-                    presenter.doLoadData();
+                    presenter.doInitLoadData();
                 } else {
                     ToastUtils.showNetErrorToast();
                 }

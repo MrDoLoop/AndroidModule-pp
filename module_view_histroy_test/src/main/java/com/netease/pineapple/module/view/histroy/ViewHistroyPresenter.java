@@ -27,7 +27,7 @@ public class ViewHistroyPresenter implements IViewHistroy.Presenter  {
 
     @Override
     public void doRefresh() {
-        doLoadData();
+        doInitLoadData();
     }
 
     @Override
@@ -62,7 +62,7 @@ public class ViewHistroyPresenter implements IViewHistroy.Presenter  {
     }
 
     @Override
-    public void doLoadData() {
+    public void doInitLoadData() {
         BaseEntityObserver observer = new BaseEntityObserver<WatchHistoryResultBean.WatchHistoryResultBeanData>() {
             @Override
             public void onRequestSuccess(WatchHistoryResultBean.WatchHistoryResultBeanData bean) {
