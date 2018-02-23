@@ -87,8 +87,8 @@ public class HomeMainFragment extends BaseFragment<IHomeMain.Presenter> implemen
     }
 
     @Override
-    public void setPresenter(IHomeMain.Presenter presenter) {
-        if (null == presenter) {
+    public void setPresenter(IHomeMain.Presenter preter) {
+        if (null == preter) {
             this.presenter = new HomeMainPresenter(this);
         }
     }

@@ -11,6 +11,7 @@ import com.netease.pineapple.common.base.BaseActivity;
 import com.netease.pineapple.common.utils.ToastUtils;
 import com.netease.pineapple.helper.BottomNavigationViewHelper;
 import com.netease.pineapple.home.HomeMainFragment;
+import com.netease.pineapple.mine.MineFragment;
 import com.netease.pineapple.module.main.frame.R;
 
 public class MainActivity extends BaseActivity {
@@ -21,7 +22,7 @@ public class MainActivity extends BaseActivity {
     private static final int FRAGMENT_DISCOVERY = 1;
     private static final int FRAGMENT_MINE = 2;
     private HomeMainFragment mHomeMainFragment;
-//    private PhotoTabLayout photoTabLayout;
+    private MineFragment mMineFragment;
 //    private VideoTabLayout videoTabLayout;
     private BottomNavigationView mBottomNavView;
     private long mExitTime = 0;
@@ -34,7 +35,7 @@ public class MainActivity extends BaseActivity {
 
         if (savedInstanceState != null) {
             mHomeMainFragment = (HomeMainFragment) getSupportFragmentManager().findFragmentByTag(HomeMainFragment.class.getName());
-//            photoTabLayout = (PhotoTabLayout) getSupportFragmentManager().findFragmentByTag(PhotoTabLayout.class.getName());
+            mMineFragment = (MineFragment) getSupportFragmentManager().findFragmentByTag(MineFragment.class.getName());
 //            videoTabLayout = (VideoTabLayout) getSupportFragmentManager().findFragmentByTag(VideoTabLayout.class.getName());
             // 恢复 recreate 前的位置
             showFragment(savedInstanceState.getInt(CUR_FRAGMENT));
@@ -101,14 +102,14 @@ public class MainActivity extends BaseActivity {
 //                }
 //                break;
 //
-//            case FRAGMENT_VIDEO:
-//                if (videoTabLayout == null) {
-//                    videoTabLayout = VideoTabLayout.getInstance();
-//                    ft.add(R.id.container, videoTabLayout, VideoTabLayout.class.getName());
-//                } else {
-//                    ft.show(videoTabLayout);
-//                }
-//                break;
+            case FRAGMENT_MINE:
+                if (mMineFragment == null) {
+                    mMineFragment = new MineFragment();
+                    ft.add(R.id.container, mMineFragment, MineFragment.class.getName());
+                } else {
+                    ft.show(mMineFragment);
+                }
+                break;
         }
 
         ft.commit();
@@ -122,9 +123,9 @@ public class MainActivity extends BaseActivity {
 //        if (photoTabLayout != null) {
 //            ft.hide(photoTabLayout);
 //        }
-//        if (videoTabLayout != null) {
-//            ft.hide(videoTabLayout);
-//        }
+        if (mMineFragment != null) {
+            ft.hide(mMineFragment);
+        }
     }
 
     @Override

@@ -24,5 +24,12 @@
     <string name="view_network_error">网络异常~</string>
     <string name="view_no_network">没有网络~</string>
 
+    <string name="login_tips">登录后可使用同步数据等完整功能</string>
+    <string name="free_data_watch_video">看视频免流量</string>
 
+    <string name="my_favorite">我喜欢的</string>
+    <string name="my_subscribed">我订阅的</string>
+    <string name="watch_histroy">观看历史</string>
+    <string name="setting">设置</string>
+    <string name="login">登录</string>
 </resources>

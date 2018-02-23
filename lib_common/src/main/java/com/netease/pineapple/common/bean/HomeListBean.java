@@ -3,13 +3,21 @@ package com.netease.pineapple.common.bean;
 import com.netease.pineapple.common.http.BaseEntity;
 import com.netease.pineapple.common.http.JsonBase;
 
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
+
 import java.util.List;
 
 /**
  * Created by zhaonan on 17/9/20.
  */
 
+@Entity
 public class HomeListBean extends BaseEntity<HomeListBean.HomeListDataBean> {
+
+    @Id(autoincrement = true)
+    private Long id; // 数据里面用的id
 
     // 首页数据datalist里面type对应的bean
     // 头部视频
@@ -22,6 +30,17 @@ public class HomeListBean extends BaseEntity<HomeListBean.HomeListDataBean> {
     public static final int HOME_LIST_ITEM_BEAN_TYPE_RECOMMEND_V2 = 13;
 
     public static final int HOME_LIST_ITEM_REFRESH_BTN = -100;
+
+
+
+    @Generated(hash = 1242786808)
+    public HomeListBean(Long id) {
+        this.id = id;
+    }
+
+    @Generated(hash = 1311887239)
+    public HomeListBean() {
+    }
 
 
 
@@ -39,6 +58,14 @@ public class HomeListBean extends BaseEntity<HomeListBean.HomeListDataBean> {
 
     public void setData(HomeListDataBean data) {
         this.data = data;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 

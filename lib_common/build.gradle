@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion build_versions.target_sdk
@@ -29,6 +30,13 @@ android {
         }
     }
 
+    //greendao使用说明 https://www.jianshu.com/p/4e6d72e7f57a
+    greendao {
+        schemaVersion 5//数据库版本号
+        daoPackage 'com.netease.pineapple.common.db'//设置DaoMaster、DaoSession、Dao包名
+        targetGenDir 'src/main/java'//设置DaoMaster、DaoSession、Dao目录
+    }
+
 }
 
 dependencies {
@@ -51,17 +59,17 @@ dependencies {
     api deps.retrofit.adapter
     api deps.retrofit.rxlifecycle
     api deps.retrofit.rxlifecycle_components
-
     api deps.okhttp
     api deps.okhttp_log_interceptor
-    // other
 
+    // other
     api deps.multitype_adapter
     api deps.event_bus
     api deps.gson
     api deps.permission
     api deps.glide
     api deps.logger
+    api deps.greendao
     debugCompile deps.leakcanary_debug
     releaseCompile deps.leakcanary_release
 
