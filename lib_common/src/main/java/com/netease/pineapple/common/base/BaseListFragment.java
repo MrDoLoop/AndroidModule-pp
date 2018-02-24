@@ -2,6 +2,7 @@ package com.netease.pineapple.common.base;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SimpleItemAnimator;
 import android.view.View;
 
 import com.netease.pineapple.common.bean.LoadingBean;
@@ -46,6 +47,11 @@ public abstract class BaseListFragment<T extends IBasePresenter> extends LazyLoa
     @Override
     protected void initView(View view) {
         recyclerView = view.findViewById(R.id.recycler_view);
+        RecyclerView.ItemAnimator animator = recyclerView.getItemAnimator();
+        if (animator instanceof SimpleItemAnimator) {
+            ((SimpleItemAnimator) animator).setSupportsChangeAnimations(false);
+        }
+
         //recyclerView.setHasFixedSize(true);
 
         networkStateView = view.findViewById(R.id.state_view);

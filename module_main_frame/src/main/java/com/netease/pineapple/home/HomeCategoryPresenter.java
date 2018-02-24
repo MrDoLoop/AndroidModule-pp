@@ -54,11 +54,7 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
 
     @Override
     public void doInitLoadData() {
-        if(NetworkUtils.isConnected()) {
-            initLoadNetData();
-        } else {
-            initLoadLocalData();
-        }
+        initLoadLocalData();
         requestAD();
     }
 
@@ -123,7 +119,7 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
 
 
     private void requestAD() {
-        if(hasAD()) {
+        if(hasAD() && NetworkUtils.isConnected()) {
             // 请求广告
             // 赵楠的测试
             BaseEntityObserver AdObserver = new BaseEntityObserver<HomeListBean.HomeListDataBean>() {
@@ -257,8 +253,6 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
 
     @Override
     public void doRefresh() {
-        //view.onShowLoading();
-        //doInitLoadData();
         initLoadNetData();
         requestAD();
     }

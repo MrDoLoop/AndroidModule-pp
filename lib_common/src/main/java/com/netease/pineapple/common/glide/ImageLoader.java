@@ -18,7 +18,7 @@ public class ImageLoader {
 
     public static void loadCenterCrop(Context context, String url, ImageView view, int defaultResId) {
         if (NetworkUtils.isConnected()) {
-            Glide.with(context).load(url).crossFade().centerCrop().into(view);
+            Glide.with(context).load(url).dontAnimate().centerCrop().into(view);
         } else {
             view.setImageResource(defaultResId);
         }
