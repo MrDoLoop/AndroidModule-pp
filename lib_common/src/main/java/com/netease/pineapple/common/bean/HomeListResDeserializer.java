@@ -7,7 +7,7 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import com.netease.pineapple.common.utils.GsonUtil;
+import com.netease.pineapple.common.utils.GsonUtils;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -58,14 +58,14 @@ public class HomeListResDeserializer implements JsonDeserializer<HomeListBean> {
                     HomeListBean.HomeListDataListItemBean tmp = null;
                     switch (type)  {
 //                        case 1: {
-//                            VideoItemBean object = GsonUtil.parse(child, VideoItemBean.class, gson);
+//                            VideoItemBean object = GsonUtils.parse(child, VideoItemBean.class, gson);
 //                            if(object != null) {
 //                                tmp = new HomeListBean.HomeListDataListItemBean(type, object);
 //                            }
 //                        }
 //                        break;
                         case HomeListBean.HOME_LIST_ITEM_BEAN_TYPE_VIDEO: {
-                            VideoItemBean object = GsonUtil.parse(child, VideoItemBean.class, gson);
+                            VideoItemBean object = GsonUtils.parse(child, VideoItemBean.class, gson);
                             // 没有订阅就是推荐过来的项目
                             object.setShowSunBtn(!object.getVideoTopic().isSubscribed());
                             if(object != null) {
@@ -74,14 +74,14 @@ public class HomeListResDeserializer implements JsonDeserializer<HomeListBean> {
                         }
                         break;
 //                        case 3: {
-//                            HomeListBean.RecommendItemBean object = GsonUtil.parse(child, HomeListBean.RecommendItemBean.class, gson);
+//                            HomeListBean.RecommendItemBean object = GsonUtils.parse(child, HomeListBean.RecommendItemBean.class, gson);
 //                            if(object != null) {
 //                                tmp = new HomeListBean.HomeListDataListItemBean(type, object);
 //                            }
 //                        }
 //                        break;
                         case HomeListBean.HOME_LIST_ITEM_BEAN_TYPE_RECOMMEND_V2: {
-                            VideoDetailBean.RecommendItemBean object = GsonUtil.parse(child, VideoDetailBean.RecommendItemBean.class, gson);
+                            VideoDetailBean.RecommendItemBean object = GsonUtils.parse(child, VideoDetailBean.RecommendItemBean.class, gson);
                             if(object != null) {
                                 tmp = new HomeListBean.HomeListDataListItemBean(type, object);
                             }

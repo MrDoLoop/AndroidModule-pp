@@ -82,8 +82,8 @@ public abstract class BaseFragment<T extends IBasePresenter> extends RxFragment 
                             @Override
                             public void accept(Disposable disposable) throws Exception {
                                 // 可添加网络连接判断等
-//                                if (!NetworkUtils.isConnected()) {
-//                                    //Toast.makeText(BaseActivity.this, R.string.toast_network_error, Toast.LENGTH_SHORT).show();
+//                                if (!Utils.isNetworkAvailable(BaseActivity.this)) {
+//                                    Toast.makeText(BaseActivity.this, R.string.toast_network_error, Toast.LENGTH_SHORT).show();
 //                                }
                             }
                         })

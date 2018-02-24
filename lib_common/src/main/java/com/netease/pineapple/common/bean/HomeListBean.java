@@ -3,8 +3,6 @@ package com.netease.pineapple.common.bean;
 import com.netease.pineapple.common.http.BaseEntity;
 import com.netease.pineapple.common.http.JsonBase;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 
 import java.util.List;
@@ -13,7 +11,7 @@ import java.util.List;
  * Created by zhaonan on 17/9/20.
  */
 
-@Entity
+
 public class HomeListBean extends BaseEntity<HomeListBean.HomeListDataBean> {
 
     @Id(autoincrement = true)
@@ -30,18 +28,6 @@ public class HomeListBean extends BaseEntity<HomeListBean.HomeListDataBean> {
     public static final int HOME_LIST_ITEM_BEAN_TYPE_RECOMMEND_V2 = 13;
 
     public static final int HOME_LIST_ITEM_REFRESH_BTN = -100;
-
-
-
-    @Generated(hash = 1242786808)
-    public HomeListBean(Long id) {
-        this.id = id;
-    }
-
-    @Generated(hash = 1311887239)
-    public HomeListBean() {
-    }
-
 
 
     public List<HomeListDataListItemBean> getDatalist() {

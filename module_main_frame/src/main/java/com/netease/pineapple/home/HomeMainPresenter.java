@@ -4,7 +4,7 @@ import com.netease.pineapple.common.bean.CategoryBean;
 import com.netease.pineapple.common.bean.CategoryListBean;
 import com.netease.pineapple.common.http.BaseEntityObserver;
 import com.netease.pineapple.common.utils.DataUtils;
-import com.netease.pineapple.common.utils.GsonUtil;
+import com.netease.pineapple.common.utils.GsonUtils;
 import com.netease.pineapple.common.utils.PPUtils;
 import com.netease.pineapple.common.utils.HttpUtils;
 
@@ -83,7 +83,7 @@ public class HomeMainPresenter implements IHomeMain.Presenter {
             is.read(buffer);
             is.close();
             String text = new String(buffer, "utf8");
-            CategoryListBean ret = GsonUtil.parse(text, CategoryListBean.class);
+            CategoryListBean ret = GsonUtils.parse(text, CategoryListBean.class);
             return ret.getData();
         } catch (Exception e) {
             e.printStackTrace();

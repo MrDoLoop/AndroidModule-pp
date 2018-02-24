@@ -7,17 +7,17 @@ import me.drakeet.multitype.Items;
 import me.drakeet.multitype.MultiTypeAdapter;
 
 
-public class DiffCallback extends DiffUtil.Callback {
+public class DiffCallbackUtils extends DiffUtil.Callback {
 
     private final Items mOldItems, mNewItems;
 
-    private DiffCallback(Items oldItems, Items mNewItems) {
+    private DiffCallbackUtils(Items oldItems, Items mNewItems) {
         this.mOldItems = oldItems;
         this.mNewItems = mNewItems;
     }
 
     public static void create(@NonNull Items oldList, @NonNull Items newList, @NonNull MultiTypeAdapter adapter) {
-        DiffCallback diffCallback = new DiffCallback(oldList, newList);
+        DiffCallbackUtils diffCallback = new DiffCallbackUtils(oldList, newList);
         DiffUtil.DiffResult result = DiffUtil.calculateDiff(diffCallback, true);
         result.dispatchUpdatesTo(adapter);
     }

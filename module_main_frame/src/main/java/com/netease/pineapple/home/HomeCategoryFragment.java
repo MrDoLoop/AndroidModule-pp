@@ -39,13 +39,20 @@ public class HomeCategoryFragment extends BaseListFragment<IHomeCategory.Present
     @Override
     public void fetchData() {
         super.fetchData();
+//        if(NetworkUtils.isConnected()) {
+//            onShowLoading();
+//            presenter.doInitLoadData();
+//        } else {
+//            onHideLoading();
+//            presenter.doShowError(getString(R.string.network_error));
+//        }
         onShowLoading();
         presenter.doInitLoadData();
     }
 
     @Override
-    public void setPresenter(IHomeCategory.Presenter presenter) {
-        if (null == presenter) {
+    public void setPresenter(IHomeCategory.Presenter preter) {
+        if (null == preter) {
             this.presenter = new HomeCategoryPresenter(this);
         }
     }

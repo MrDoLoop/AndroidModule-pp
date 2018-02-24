@@ -20,7 +20,7 @@ import java.util.Set;
 /**
  * Gson处理工具类
  */
-public class GsonUtil {
+public class GsonUtils {
 
     public static String toJson(Object obj) {
         return new Gson().toJson(obj);

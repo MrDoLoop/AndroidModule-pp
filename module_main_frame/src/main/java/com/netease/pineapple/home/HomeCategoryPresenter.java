@@ -5,14 +5,24 @@ import com.netease.pineapple.common.bean.HomeListBean;
 import com.netease.pineapple.common.bean.HomeListResDeserializer;
 import com.netease.pineapple.common.bean.ListMultiTypeBean;
 import com.netease.pineapple.common.bean.VideoItemBean;
+import com.netease.pineapple.common.cache.CacheHelper;
 import com.netease.pineapple.common.http.BaseEntityObserver;
 import com.netease.pineapple.common.utils.DataUtils;
-import com.netease.pineapple.common.utils.GsonUtil;
 import com.netease.pineapple.common.utils.ErrorActionUtils;
+import com.netease.pineapple.common.utils.GsonUtils;
 import com.netease.pineapple.common.utils.HttpUtils;
+import com.netease.pineapple.common.utils.NetworkUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class HomeCategoryPresenter implements IHomeCategory.Presenter {
 
@@ -39,14 +49,65 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
 
     public HomeCategoryPresenter(IHomeCategory.View view) {
         this.view = view;
-        this.mHomeGson = GsonUtil.getGsonWithDeserializer(HomeListBean.class, new HomeListResDeserializer());
+        this.mHomeGson = GsonUtils.getGsonWithDeserializer(HomeListBean.class, new HomeListResDeserializer());
     }
 
     @Override
     public void doInitLoadData() {
+        if(NetworkUtils.isConnected()) {
+            initLoadNetData();
+        } else {
+            initLoadLocalData();
+        }
+        requestAD();
+    }
+
+    private void initLoadLocalData() {
+        Observable.create(new ObservableOnSubscribe<HomeListBean.HomeListDataBean>() {
+            @Override
+            public void subscribe(ObservableEmitter<HomeListBean.HomeListDataBean> emitter) throws Exception {
+                HomeListBean.HomeListDataBean bean = CacheHelper.getHomeListDataBean(getCacheKey());
+                if(bean == null) {
+                    initLoadNetData();
+                } else {
+                    emitter.onNext(bean);
+                }
+                emitter.onComplete();
+            }
+        }).subscribeOn(Schedulers.io()) // 指定 subscribe() 发生在 IO 线程
+         .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<HomeListBean.HomeListDataBean>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(HomeListBean.HomeListDataBean bean) {
+                if(bean == null) {
+                    initLoadNetData();
+                } else {
+                    doSetAdapter(bean.getDatalist());
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
+    private void initLoadNetData() {
         BaseEntityObserver observer = new BaseEntityObserver<HomeListBean.HomeListDataBean>() {
             @Override
             public void onRequestSuccess(HomeListBean.HomeListDataBean bean) {
+                saveCacheData(bean);
                 doSetAdapter(bean.getDatalist());
             }
 
@@ -58,6 +119,10 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
         };
         HttpUtils.getHomeRecommendList(view, observer, mHomeGson, mFn, 0, mEname);
 
+    }
+
+
+    private void requestAD() {
         if(hasAD()) {
             // 请求广告
             // 赵楠的测试
@@ -82,6 +147,16 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
             HttpUtils.getHomeRecommendList(view, AdObserver, mHomeGson, mFn, 40, mEname);
         }
     }
+
+    private void saveCacheData(HomeListBean.HomeListDataBean bean) {
+        if(bean == null) return;
+        CacheHelper.saveHomeListDataBean(getCacheKey(), bean);
+    }
+
+    private String getCacheKey() {
+        return "home-"+mEname;
+    }
+
 
     @Override
     public void doLoadMoreData() {
@@ -183,7 +258,9 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
     @Override
     public void doRefresh() {
         //view.onShowLoading();
-        doInitLoadData();
+        //doInitLoadData();
+        initLoadNetData();
+        requestAD();
     }
 
     @Override

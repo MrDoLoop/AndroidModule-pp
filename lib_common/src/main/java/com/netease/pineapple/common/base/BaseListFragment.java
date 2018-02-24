@@ -9,7 +9,7 @@ import com.netease.pineapple.common.bean.LoadingEndBean;
 import com.netease.pineapple.common.bean.LoadingErrorBean;
 import com.netease.pineapple.common.listener.IOnItemClickListener;
 import com.netease.pineapple.common.listener.OnLoadMoreListener;
-import com.netease.pineapple.common.utils.DiffCallback;
+import com.netease.pineapple.common.utils.DiffCallbackUtils;
 import com.netease.pineapple.common.utils.NetworkUtils;
 import com.netease.pineapple.common.utils.PPUtils;
 import com.netease.pineapple.common.utils.RxBus;
@@ -139,7 +139,7 @@ public abstract class BaseListFragment<T extends IBasePresenter> extends LazyLoa
         if(loadMore) {
             newItems.add(new LoadingBean());
         }
-        DiffCallback.create(oldItems, newItems, adapter);
+        DiffCallbackUtils.create(oldItems, newItems, adapter);
         oldItems.clear();
         oldItems.addAll(newItems);
         canLoadMore = loadMore;
