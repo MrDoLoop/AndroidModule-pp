@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_centerInParent="true"
     android:orientation="vertical"
-    android:background="@color/White"
+    android:background="@color/windowBackground"
     android:clickable="true"
     android:visibility="visible">
 
