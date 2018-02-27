@@ -40,7 +40,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class CacheUtils {
     public static final int TIME_HOUR = 60 * 60;
     public static final int TIME_DAY = TIME_HOUR * 24;
-    private static final int MAX_SIZE = 1000 * 1000 * 50; // 50 mb
+    private static final int MAX_SIZE = 1000 * 1000 * 500; // 500 mb
     private static final int MAX_COUNT = Integer.MAX_VALUE; // 不限制存放数据的数量
     private static Map<String, CacheUtils> mInstanceMap = new HashMap<>();
     private ACacheManager mCache;

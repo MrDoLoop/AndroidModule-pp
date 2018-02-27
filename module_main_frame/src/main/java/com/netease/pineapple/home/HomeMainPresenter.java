@@ -2,6 +2,7 @@ package com.netease.pineapple.home;
 
 import com.netease.pineapple.common.bean.CategoryBean;
 import com.netease.pineapple.common.bean.CategoryListBean;
+import com.netease.pineapple.common.cache.CacheHelper;
 import com.netease.pineapple.common.http.BaseEntityObserver;
 import com.netease.pineapple.common.utils.DataUtils;
 import com.netease.pineapple.common.utils.GsonUtils;
@@ -17,7 +18,6 @@ import java.util.ArrayList;
 
 public class HomeMainPresenter implements IHomeMain.Presenter {
     private IHomeMain.View view;
-
 
     public HomeMainPresenter(IHomeMain.View view) {
         this.view = view;
@@ -46,24 +46,34 @@ public class HomeMainPresenter implements IHomeMain.Presenter {
 
     @Override
     public void doInitLoadData() {
-        view.onShowLoading();
-        //请求网络数据
+
+        // 直接返回本地缓存的数据
+        ArrayList<CategoryBean> list = CacheHelper.getHomeCategoryDataBean();
+        if(DataUtils.listNotEmpty(list)) {
+            view.onShowCatagoryList(list);
+        } else {
+            view.onShowCatagoryList(readCategorylListFromAsset());
+        }
+
+        //请求网络数据 暂时存储下来 下次在使用
+        //view.onShowLoading();
         BaseEntityObserver observer = new BaseEntityObserver<ArrayList<CategoryBean>>() {
             @Override
-            public void onRequestSuccess(ArrayList<CategoryBean> s) {
-                view.onHideLoading();
-                if(DataUtils.listNotEmpty(s)) {
-                    view.onShowCatagoryList(s);
-                } else {
-                    view.onShowCatagoryList(readCategorylListFromAsset());
-                }
+            public void onRequestSuccess(ArrayList<CategoryBean> list) {
+                //view.onHideLoading();
+                CacheHelper.saveHomeCategoryDataBean(list);
+//                if(DataUtils.listNotEmpty(list)) {
+//                    view.onShowCatagoryList(list);
+//                } else {
+//                    view.onShowCatagoryList(readCategorylListFromAsset());
+//                }
             }
 
             @Override
             public void onRequestError(String msg, Throwable e) {
-                super.onRequestError(msg, e);
-                view.onHideLoading();
-                view.onShowCatagoryList(readCategorylListFromAsset());
+//                super.onRequestError(msg, e);
+//                view.onHideLoading();
+//                view.onShowCatagoryList(readCategorylListFromAsset());
             }
         };
         HttpUtils.getHomeCategroyList(view, observer);
@@ -73,7 +83,6 @@ public class HomeMainPresenter implements IHomeMain.Presenter {
     public void doShowNoMore() {
 
     }
-
 
     private ArrayList<CategoryBean> readCategorylListFromAsset() {
         try {
