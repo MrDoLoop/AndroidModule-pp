@@ -1,33 +1,20 @@
 package com.netease.pineapple.home;
 
-import com.google.gson.Gson;
+import com.netease.pineapple.common.base.OnDataReturnListener;
 import com.netease.pineapple.common.bean.HomeListBean;
-import com.netease.pineapple.common.bean.HomeListResDeserializer;
 import com.netease.pineapple.common.bean.ListMultiTypeBean;
 import com.netease.pineapple.common.bean.VideoItemBean;
-import com.netease.pineapple.common.cache.CacheHelper;
-import com.netease.pineapple.common.http.BaseEntityObserver;
 import com.netease.pineapple.common.utils.DataUtils;
 import com.netease.pineapple.common.utils.ErrorActionUtils;
-import com.netease.pineapple.common.utils.GsonUtils;
-import com.netease.pineapple.common.utils.HttpUtils;
-import com.netease.pineapple.common.utils.NetworkUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-
 public class HomeCategoryPresenter implements IHomeCategory.Presenter {
 
     private static final String TAG = "HomeCategoryPresenter";
-    private IHomeCategory.View view;
+    private IHomeCategory.View mView;
+    private HomeCategoryModel mModel;
     //最终用来显示的总list
     private List<ListMultiTypeBean> mShowList = new ArrayList<>();
     //广告列表
@@ -36,8 +23,6 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
     private List<HomeListBean.HomeListDataListItemBean> mDataItemList = new ArrayList<>();
 
     private String mEname;
-    private Gson mHomeGson;
-    private int mFn = 1;
 
     @Override
     public boolean hasAD() {
@@ -48,8 +33,8 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
     }
 
     public HomeCategoryPresenter(IHomeCategory.View view) {
-        this.view = view;
-        this.mHomeGson = GsonUtils.getGsonWithDeserializer(HomeListBean.class, new HomeListResDeserializer());
+        this.mModel = new HomeCategoryModel();
+        this.mView = view;
     }
 
     @Override
@@ -59,27 +44,9 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
     }
 
     private void initLoadLocalData() {
-        Observable.create(new ObservableOnSubscribe<HomeListBean.HomeListDataBean>() {
+        mModel.initLoadLocalData(new OnDataReturnListener<HomeListBean.HomeListDataBean>() {
             @Override
-            public void subscribe(ObservableEmitter<HomeListBean.HomeListDataBean> emitter) throws Exception {
-                HomeListBean.HomeListDataBean bean = CacheHelper.getHomeListDataBean(getCacheKey());
-                if(bean == null) {
-                    initLoadNetData();
-                } else {
-                    emitter.onNext(bean);
-                }
-                emitter.onComplete();
-            }
-        }).subscribeOn(Schedulers.io()) // 指定 subscribe() 发生在 IO 线程
-         .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<HomeListBean.HomeListDataBean>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(HomeListBean.HomeListDataBean bean) {
+            public void onDataReady(HomeListBean.HomeListDataBean bean) {
                 if(bean == null) {
                     initLoadNetData();
                 } else {
@@ -88,44 +55,35 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
             }
 
             @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
+            public void onDataError(String msg, Throwable e) {
 
             }
         });
     }
 
     private void initLoadNetData() {
-        BaseEntityObserver observer = new BaseEntityObserver<HomeListBean.HomeListDataBean>() {
+        mModel.initLoadNetData(mView, new OnDataReturnListener<HomeListBean.HomeListDataBean>() {
             @Override
-            public void onRequestSuccess(HomeListBean.HomeListDataBean bean) {
-                saveCacheData(bean);
+            public void onDataReady(HomeListBean.HomeListDataBean bean) {
                 doSetAdapter(bean.getDatalist());
             }
 
             @Override
-            public void onRequestError(String msg, Throwable e) {
+            public void onDataError(String msg, Throwable e) {
                 doShowError(msg);
                 ErrorActionUtils.print(e);
             }
-        };
-        HttpUtils.getHomeRecommendList(view, observer, mHomeGson, mFn, 0, mEname);
-
+        });
     }
 
-
-    private void requestAD() {
-        if(hasAD() && NetworkUtils.isConnected()) {
-            // 请求广告
-            // 赵楠的测试
-            BaseEntityObserver AdObserver = new BaseEntityObserver<HomeListBean.HomeListDataBean>() {
+    @Override
+    public void requestAD() {
+        if(hasAD()) {
+            mModel.requestAD(mView, new OnDataReturnListener<HomeListBean.HomeListDataBean>() {
                 @Override
-                public void onRequestSuccess(HomeListBean.HomeListDataBean bean) {
-                    for(int i = 0; i<bean.getDataList().size() ;i++) {
+                public void onDataReady(HomeListBean.HomeListDataBean bean) {
+                    if(bean == null) return;
+                    for(int i = 0; i < bean.getDataList().size() ;i++) {
                         String title = ((VideoItemBean)bean.getDataList().get(i).getContent()).getTitle();
                         ((VideoItemBean)bean.getDataList().get(i).getContent()).setTitle("我是广告---" + title);
                     }
@@ -136,39 +94,27 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
                 }
 
                 @Override
-                public void onRequestError(String msg, Throwable e) {
+                public void onDataError(String msg, Throwable e) {
                     ErrorActionUtils.print(e);
                 }
-            };
-            HttpUtils.getHomeRecommendList(view, AdObserver, mHomeGson, mFn, 40, mEname);
+            });
         }
     }
 
-    private void saveCacheData(HomeListBean.HomeListDataBean bean) {
-        if(bean == null) return;
-        CacheHelper.saveHomeListDataBean(getCacheKey(), bean);
-    }
-
-    private String getCacheKey() {
-        return "home-"+mEname;
-    }
-
-
     @Override
     public void doLoadMoreData() {
-        BaseEntityObserver observer = new BaseEntityObserver<HomeListBean.HomeListDataBean>() {
+        mModel.doLoadMoreData(mView, mDataItemList.size(), new OnDataReturnListener<HomeListBean.HomeListDataBean>() {
             @Override
-            public void onRequestSuccess(HomeListBean.HomeListDataBean bean) {
+            public void onDataReady(HomeListBean.HomeListDataBean bean) {
                 doAppendMoreData(bean.getDatalist());
             }
 
             @Override
-            public void onRequestError(String msg, Throwable e) {
+            public void onDataError(String msg, Throwable e) {
                 doShowLoadMoreError();
                 ErrorActionUtils.print(e);
             }
-        };
-        HttpUtils.getHomeRecommendList(view, observer, mHomeGson, mFn, mDataItemList.size(), mEname);
+        });
     }
 
     @Override
@@ -180,15 +126,14 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
 
     @Override
     public void doAppendMoreData(List<HomeListBean.HomeListDataListItemBean> list) {
-        mFn++;
         mDataItemList.addAll(list);
         appendDataToShowList(list);
         updateList();
     }
 
     private void updateList() {
-        view.onSetAdapter(mShowList, true);
-        view.onHideLoading();
+        mView.onSetAdapter(mShowList, true);
+        mView.onHideLoading();
     }
 
 
@@ -249,6 +194,7 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
     @Override
     public void setEname(String ename) {
         this.mEname = ename;
+        mModel.setEname(ename);
     }
 
     @Override
@@ -259,19 +205,19 @@ public class HomeCategoryPresenter implements IHomeCategory.Presenter {
 
     @Override
     public void doShowError(String msg) {
-        view.onHideLoading();
-        view.onShowError(msg);
+        mView.onHideLoading();
+        mView.onShowError(msg);
     }
 
     @Override
     public void doShowNoMore() {
-        view.onHideLoading();
-        view.onShowNoMore();
+        mView.onHideLoading();
+        mView.onShowNoMore();
     }
 
     @Override
     public void doShowLoadMoreError() {
-        view.onHideLoading();
-        view.onShowLoadMoreError();
+        mView.onHideLoading();
+        mView.onShowLoadMoreError();
     }
 }

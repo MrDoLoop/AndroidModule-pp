@@ -2,7 +2,6 @@ package com.netease.pineapple.common.base;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SimpleItemAnimator;
 import android.view.View;
 
 import com.netease.pineapple.common.bean.LoadingBean;
@@ -47,14 +46,15 @@ public abstract class BaseListFragment<T extends IBasePresenter> extends LazyLoa
     @Override
     protected void initView(View view) {
         recyclerView = view.findViewById(R.id.recycler_view);
-        RecyclerView.ItemAnimator animator = recyclerView.getItemAnimator();
-        if (animator instanceof SimpleItemAnimator) {
-            ((SimpleItemAnimator) animator).setSupportsChangeAnimations(false);
-        }
+//        RecyclerView.ItemAnimator animator = recyclerView.getItemAnimator();
+//        if (animator instanceof SimpleItemAnimator) {
+//            ((SimpleItemAnimator) animator).setSupportsChangeAnimations(false);
+//        }
 
         //recyclerView.setHasFixedSize(true);
 
         networkStateView = view.findViewById(R.id.state_view);
+        networkStateView.setVisibility(View.VISIBLE);
         networkStateView.setOnRefreshListener(new NetworkStateView.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -66,6 +66,7 @@ public abstract class BaseListFragment<T extends IBasePresenter> extends LazyLoa
                 }
             }
         });
+        networkStateView.showLoading();
         swipeRefreshLayout = view.findViewById(R.id.refresh_layout);
         swipeRefreshLayout.setColorSchemeColors(PPUtils.getAppContext().getResources().getColor(R.color.colorPrimary));
         swipeRefreshLayout.setOnRefreshListener(this);

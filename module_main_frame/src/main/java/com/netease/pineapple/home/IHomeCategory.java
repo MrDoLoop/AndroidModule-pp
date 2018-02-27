@@ -26,6 +26,12 @@ public interface IHomeCategory {
          * 是否有广告
          */
         boolean hasAD();
+
+        /**
+         * 请求广告
+         */
+        void requestAD();
+
         /**
          * 设置请求的ename
          */
