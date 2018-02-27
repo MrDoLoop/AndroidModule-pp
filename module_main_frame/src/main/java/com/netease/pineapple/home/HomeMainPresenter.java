@@ -6,8 +6,8 @@ import com.netease.pineapple.common.cache.CacheHelper;
 import com.netease.pineapple.common.http.BaseEntityObserver;
 import com.netease.pineapple.common.utils.DataUtils;
 import com.netease.pineapple.common.utils.GsonUtils;
-import com.netease.pineapple.common.utils.PPUtils;
 import com.netease.pineapple.common.utils.HttpUtils;
+import com.netease.pineapple.common.utils.PPUtils;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -60,8 +60,9 @@ public class HomeMainPresenter implements IHomeMain.Presenter {
         BaseEntityObserver observer = new BaseEntityObserver<ArrayList<CategoryBean>>() {
             @Override
             public void onRequestSuccess(ArrayList<CategoryBean> list) {
-                //view.onHideLoading();
+
                 CacheHelper.saveHomeCategoryDataBean(list);
+//                view.onHideLoading();
 //                if(DataUtils.listNotEmpty(list)) {
 //                    view.onShowCatagoryList(list);
 //                } else {
